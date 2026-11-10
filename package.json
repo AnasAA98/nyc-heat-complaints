@@ -17,7 +17,10 @@
 		"lint": "prettier --check .",
 		"format": "prettier --write .",
 		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run"
+		"test": "npm run test:unit -- --run",
+		"fetch": "tsx scripts/fetch.ts",
+		"build-data": "tsx scripts/build-data.ts",
+		"data": "npm run fetch && npm run build-data"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^4.0.0",
