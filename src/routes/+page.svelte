@@ -67,6 +67,9 @@
 	const every = buildings.repeatEverySeason;
 	const violationsWritten = (k: number) => enforcement.heatViolations[k] + enforcement.hotWaterViolations[k];
 
+	// The housing agency's page on the heat and hot water rules.
+	const HEAT_RULES = 'https://www.nyc.gov/site/hpd/services-and-information/heat-and-hot-water-information.page';
+
 	const description = `New Yorkers filed ${big(complaints.total)} heat and hot water complaints over six winters. About half were closed after someone said the heat was back. ${pc(overall.violation)} ended with a violation.`;
 </script>
 
@@ -130,12 +133,14 @@
 		<div class="why card">
 			<p class="eyebrow">Why I looked into this</p>
 			<p class="quote">
-				This started in my own apartment in Queens. When the heat became a problem in my building, I emailed my
-				super. I emailed building management. I filed a complaint with 311. I am still dealing with it.
+				This started in my own apartment in Queens, where I have been suffering from excessive heat. I called my
+				super. I called building management. I called 311. None of them were able to help. I am still dealing
+				with it.
 			</p>
 			<p>
-				I wanted to know whether that was just my building, or the way the system usually works. So I downloaded the
-				city’s record of every heat complaint from the last six winters, {big(complaints.total)} of them, and
+				New York’s <a href={HEAT_RULES}>heat rules</a> set a minimum temperature for apartments and no maximum. That
+				made me want to see how the system handles the heat complaints it is built for. So I downloaded the city’s
+				record of every heat and hot water complaint from the last six winters, {big(complaints.total)} of them, and
 				followed what happened to each one.
 			</p>
 			<p>
@@ -560,6 +565,10 @@
 		margin-bottom: 14px;
 		color: var(--ink-3);
 		font-size: 12.5px;
+	}
+	.why a {
+		color: var(--ink);
+		font-weight: 550;
 	}
 	.why .quote {
 		font-size: clamp(20px, 2.4vw, 23px);
