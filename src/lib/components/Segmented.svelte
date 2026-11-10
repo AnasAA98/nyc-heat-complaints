@@ -59,7 +59,7 @@
 	input:checked + span {
 		background: var(--ink);
 		border-color: var(--ink);
-		color: var(--page);
+		color: var(--surface);
 	}
 	input:focus-visible + span {
 		outline: 2px solid var(--blue);

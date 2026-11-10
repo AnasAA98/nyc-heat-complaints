@@ -68,7 +68,6 @@
 	subtitle="Each dot is one heat season: how cold it was, and how many heat and hot water complaints were filed."
 	source="NYC Open Data, 311 Service Requests; National Oceanic and Atmospheric Administration, Central Park weather station."
 	note="Heating degree days add up how far each day's average temperature fell below {hddBase}°F, from Oct. 1 to May 31. A higher total means a colder season."
-	width="text"
 >
 	<div class="chart" bind:clientWidth={width}>
 		<svg
@@ -175,7 +174,7 @@
 	}
 	.dot {
 		fill: var(--blue);
-		stroke: var(--page);
+		stroke: var(--surface);
 		stroke-width: 2;
 	}
 	.dot.on {

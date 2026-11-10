@@ -34,7 +34,6 @@
 	subtitle="Share of closed complaints followed by a new heat complaint from the same building within {windowDays} days, by building size. All six seasons."
 	source="NYC Open Data, 311 Service Requests; building sizes from the Department of City Planning's PLUTO tax lot file."
 	note="A new complaint can come from a different apartment or be about a different problem. Bigger buildings have more tenants who can call, so compare within a row, not between rows."
-	width="text"
 >
 	<ul class="legend" aria-label="Outcomes compared">
 		<li><span class="swatch dot" style:background="var(--orange)"></span>Closed after someone said it was fixed</li>
@@ -133,7 +132,7 @@
 		stroke-width: 2;
 	}
 	.dot {
-		stroke: var(--page);
+		stroke: var(--surface);
 		stroke-width: 2;
 	}
 	.value {

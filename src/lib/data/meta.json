@@ -109,8 +109,9 @@
 		}
 	},
 	"lookup": {
-		"zips": 181,
-		"buildings": 56145,
-		"bytes": 5036165
+		"zips": 183,
+		"buildings": 196640,
+		"withRecords": 81001,
+		"bytes": 10826419
 	}
 }

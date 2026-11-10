@@ -230,7 +230,9 @@ for (const { row } of readCsvDir(join(RAW, 'pluto'))) {
 			n.buildings++;
 		}
 	}
-	if (wanted.has(bbl)) {
+	// Kept for the building lookup: every apartment building, plus any other lot
+	// that a complaint, violation or court case points at.
+	if (wanted.has(bbl) || apartment) {
 		lots.set(bbl, {
 			units,
 			band: sizeBand(units),
@@ -563,32 +565,43 @@ const cityRate = buildingSeasons.map((s) => round((s.complaints / city.apartment
 
 // ---- 9. Building lookup, one file per ZIP code -----------------------------
 
+// As many buildings as possible: every apartment building (three or more homes)
+// whether or not it had a complaint, plus any smaller home or public housing lot
+// with a complaint, a violation or a court case on record.
 rmSync(LOOKUP, { recursive: true, force: true });
 mkdirSync(LOOKUP, { recursive: true });
-const byZip = new Map<string, unknown[][]>();
-for (const [bbl, b] of apartmentBuildings) {
-	const lot = lots.get(bbl)!;
-	if (!/^\d{5}$/.test(lot.zip)) continue;
+const byZip = new Map<string, { row: unknown[]; days: number }[]>();
+let lookupActive = 0;
+for (const [bbl, lot] of lots) {
+	if (!/^\d{5}$/.test(lot.zip) || !lot.address) continue;
+	const b = buildings.get(bbl);
+	const violations = SEASONS.map(
+		(_, i) => (heatViolations.get(bbl)?.[i] ?? 0) + (hotWaterViolations.get(bbl)?.[i] ?? 0)
+	);
+	const courtCases = cases.get(bbl) ?? zeros();
+	const active = !!b || sum(violations) > 0 || sum(courtCases) > 0;
+	if (!active && !lot.apartment) continue;
+
+	// Compact row: address, homes, year built, buildings on the lot. Lots with
+	// anything on record add per-season complaints, complaint-days, HPD heat and
+	// hot water violations, and HPD court cases; a final 1 marks public housing.
+	const row: unknown[] = [lot.address, lot.units, lot.year, lot.numBuildings];
+	if (active) {
+		row.push(b?.c ?? zeros(), b?.d ?? zeros(), violations, courtCases);
+		if (lot.publicHousing) row.push(1);
+		lookupActive++;
+	}
 	const list = byZip.get(lot.zip) ?? [];
-	// Compact row: address, homes, year built, buildings on the lot, then per-season
-	// complaints, complaint-days, HPD heat/hot water violations, HPD court cases.
-	list.push([
-		lot.address,
-		lot.units,
-		lot.year,
-		lot.numBuildings,
-		b.c,
-		b.d,
-		SEASONS.map((_, i) => (heatViolations.get(bbl)?.[i] ?? 0) + (hotWaterViolations.get(bbl)?.[i] ?? 0)),
-		cases.get(bbl) ?? zeros()
-	]);
+	list.push({ row, days: sum(b?.d ?? []) });
 	byZip.set(lot.zip, list);
 }
 const zipIndex: { zip: string; buildings: number }[] = [];
 let lookupBytes = 0;
 for (const [zip, list] of [...byZip.entries()].sort()) {
-	list.sort((a, b) => sum(b[5] as number[]) - sum(a[5] as number[]));
-	const body = JSON.stringify({ zip, seasons: SEASONS, buildings: list });
+	list.sort(
+		(a, b) => b.days - a.days || String(a.row[0]).localeCompare(String(b.row[0]), 'en', { numeric: true })
+	);
+	const body = JSON.stringify({ zip, seasons: SEASONS, buildings: list.map((l) => l.row) });
 	writeFileSync(join(LOOKUP, `${zip}.json`), body);
 	lookupBytes += body.length;
 	zipIndex.push({ zip, buildings: list.length });
@@ -720,7 +733,12 @@ const meta = {
 	violations: { ...violationTotals, rows: done('violations').rows },
 	cases: { ...caseTotals, rows: done('litigation').rows },
 	city: { ...city, complaintsBySize },
-	lookup: { zips: zipIndex.length, buildings: sum(zipIndex.map((z) => z.buildings)), bytes: lookupBytes }
+	lookup: {
+		zips: zipIndex.length,
+		buildings: sum(zipIndex.map((z) => z.buildings)),
+		withRecords: lookupActive,
+		bytes: lookupBytes
+	}
 };
 
 const categoryTable = [...textCounts.entries()]

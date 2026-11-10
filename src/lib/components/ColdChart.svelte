@@ -289,7 +289,7 @@
 		font-weight: 600;
 		fill: var(--ink);
 		paint-order: stroke;
-		stroke: var(--page);
+		stroke: var(--surface);
 		stroke-width: 4px;
 		stroke-linejoin: round;
 	}
@@ -302,7 +302,7 @@
 	}
 	.marker {
 		fill: var(--ink);
-		stroke: var(--page);
+		stroke: var(--surface);
 		stroke-width: 2;
 	}
 	.tip {

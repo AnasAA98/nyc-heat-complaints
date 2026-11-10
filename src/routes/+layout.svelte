@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '@fontsource-variable/source-serif-4';
+	import '@fontsource-variable/geist';
 	import '../app.css';
 	import favicon from '#lib/assets/favicon.svg';
 	import type { LayoutProps } from './$types';

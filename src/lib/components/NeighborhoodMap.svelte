@@ -28,8 +28,11 @@
 		cityRate: number[];
 		areas: Area[];
 		minApartments: number;
+		// Citywide totals, the same ones the article quotes.
+		cityApartments: number;
+		cityBuildings: number;
 	}
-	let { seasons, cityRate, areas, minApartments }: Props = $props();
+	let { seasons, cityRate, areas, minApartments, cityApartments, cityBuildings }: Props = $props();
 
 	// Fixed classes for every season, so the colors mean the same thing as you switch.
 	const BREAKS = [25, 50, 100, 150, 250];
@@ -77,8 +80,8 @@
 		const total = (key: 'c' | 'nd' | 'sf' | 'v' | 'b' | 'hv') =>
 			seasons.map((_, k) => areas.reduce((sum, a) => sum + a[key][k], 0));
 		return {
-			apartments: areas.reduce((sum, a) => sum + a.apartments, 0),
-			buildings: areas.reduce((sum, a) => sum + a.buildings, 0),
+			apartments: cityApartments,
+			buildings: cityBuildings,
 			nd: total('nd'),
 			sf: total('sf'),
 			v: total('v'),
@@ -123,7 +126,7 @@
 	title="Where heat complaints are most common"
 	subtitle="Heat and hot water complaints for every 1,000 apartments, by neighborhood. Click a neighborhood, or search for one."
 	source="NYC Open Data, 311 Service Requests and HPD violations; Department of City Planning, PLUTO and 2020 Neighborhood Tabulation Areas."
-	note="Counts buildings with three or more homes and leaves out public housing, whose tenants report to NYCHA instead of 311. Neighborhoods with fewer than {num(minApartments)} such apartments are not rated. Areas with many co-ops and condos tend to have lower rates because owners rarely file these complaints."
+	note="Counts buildings with three or more homes and leaves out public housing, whose tenants report to NYCHA instead of 311. Neighborhoods with fewer than {num(minApartments)} such apartments are not rated, and every figure in the panel covers those buildings only. Areas with many co-ops and condos tend to have lower rates because owners rarely file these complaints."
 	width="full"
 	tableLabel="Show every neighborhood"
 	id="map"
@@ -150,16 +153,18 @@
 
 	<div class="layout">
 		<div class="map">
-			<div class="legend" aria-hidden="true">
-				<div class="ramp">
-					{#each RAMP as color, k (color)}
-						<span class="step" style:background={color}>
-							{#if k > 0}<span class="break">{BREAKS[k - 1]}</span>{/if}
-						</span>
-					{/each}
+			<div class="key-block" aria-hidden="true">
+				<span class="unit">Complaints per 1,000 apartments</span>
+				<div class="scale">
+					<div class="ramp">
+						{#each RAMP as color, k (color)}
+							<span class="step" style:background={color}>
+								{#if k > 0}<span class="break">{BREAKS[k - 1]}</span>{/if}
+							</span>
+						{/each}
+					</div>
+					<span class="none"><span class="swatch" style:background="var(--nodata)"></span>Not rated</span>
 				</div>
-				<span class="unit">complaints per 1,000 apartments</span>
-				<span class="none"><span class="swatch" style:background="var(--nodata)"></span>Not rated</span>
 			</div>
 
 			<div class="frame" bind:this={frame} bind:clientWidth={width} style:aspect-ratio="1 / 0.97">
@@ -210,7 +215,7 @@
 		</div>
 
 		<aside class="panel" aria-live="polite">
-			<p class="eyebrow">{selected ? selected.boro : 'All five boroughs'} · {seasonLabel(season)}</p>
+			<p class="where">{selected ? selected.boro : 'All five boroughs'} · {seasonLabel(season)}</p>
 			<h4>{selected ? selected.name : 'New York City'}</h4>
 
 			<p class="hero">
@@ -321,9 +326,10 @@
 		max-width: 100%;
 		font-size: 14px;
 		padding: 7px 12px;
+		height: 40px;
 		border-radius: 999px;
 		border: 1px solid var(--axis);
-		background: var(--panel);
+		background: var(--inset);
 	}
 	.layout {
 		display: grid;
@@ -331,18 +337,25 @@
 		gap: 32px;
 		align-items: start;
 	}
-	.legend {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 6px 14px;
+	.key-block {
 		font-size: 12.5px;
 		color: var(--ink-2);
-		margin-bottom: 18px;
+		margin-bottom: 8px;
+	}
+	.key-block .unit {
+		display: block;
+		margin-bottom: 6px;
+		font-weight: 550;
+	}
+	.scale {
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
 	}
 	.ramp {
 		display: flex;
 		gap: 2px;
+		padding-bottom: 18px; /* room for the numbers under the steps */
 	}
 	.step {
 		position: relative;
@@ -366,6 +379,7 @@
 	}
 	.none {
 		white-space: nowrap;
+		line-height: 10px;
 	}
 	.frame {
 		position: relative;
@@ -384,13 +398,13 @@
 	}
 	.hood-lines {
 		fill: none;
-		stroke: var(--page);
+		stroke: var(--surface);
 		stroke-width: 0.6;
 		pointer-events: none;
 	}
 	.borough-lines {
 		fill: none;
-		stroke: var(--page);
+		stroke: var(--surface);
 		stroke-width: 2;
 		pointer-events: none;
 	}
@@ -410,7 +424,7 @@
 		text-transform: uppercase;
 		fill: var(--ink);
 		paint-order: stroke;
-		stroke: var(--page);
+		stroke: var(--surface);
 		stroke-width: 3px;
 		stroke-linejoin: round;
 		pointer-events: none;
@@ -423,23 +437,24 @@
 	}
 
 	.panel {
-		border-top: 1px solid var(--rule);
-		padding-top: 14px;
+		padding: 22px;
+		border-radius: 16px;
+		background: var(--inset);
 	}
-	.eyebrow {
+	.where {
 		margin: 0;
 		font-size: 12px;
 		font-weight: 600;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.06em;
 		text-transform: uppercase;
 		color: var(--ink-3);
 	}
 	h4 {
-		margin: 2px 0 10px;
-		font-family: var(--serif);
-		font-size: 24px;
-		line-height: 1.15;
+		margin: 4px 0 12px;
+		font-size: 26px;
+		line-height: 1.1;
 		font-weight: 650;
+		letter-spacing: -0.025em;
 		text-wrap: balance;
 	}
 	.hero {
@@ -449,16 +464,17 @@
 		gap: 8px;
 	}
 	.hero .figure {
-		font-size: 44px;
-		line-height: 1;
-		font-weight: 700;
-		letter-spacing: -0.02em;
+		font-size: 56px;
+		line-height: 0.95;
+		font-weight: 680;
+		letter-spacing: -0.04em;
+		color: var(--blue);
 	}
 	.hero .unit {
 		font-size: 13.5px;
 		line-height: 1.25;
 		color: var(--ink-2);
-		max-width: 12ch;
+		max-width: 16ch;
 	}
 	.context {
 		margin: 8px 0 0;

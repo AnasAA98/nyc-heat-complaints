@@ -16,22 +16,22 @@
 			fetched: meta.fetchedAt.complaints
 		},
 		{
-			name: `Primary Land Use Tax Lot Output (PLUTO), version ${meta.plutoVersion}`,
+			name: `PLUTO tax lot file, version ${meta.plutoVersion}`,
 			publisher: 'Department of City Planning',
 			href: open('64uk-42ks'),
-			use: 'The number of homes on each tax lot, its owner type and its census tract.',
+			use: 'The number of homes on each tax lot, its owner and its census tract.',
 			fetched: meta.fetchedAt.pluto
 		},
 		{
 			name: 'Housing Maintenance Code Violations',
-			publisher: 'Department of Housing Preservation and Development',
+			publisher: 'Housing Preservation and Development',
 			href: open('wvxf-dwi5'),
 			use: 'Violations inspectors issued for failing to provide heat or hot water.',
 			fetched: meta.fetchedAt.violations
 		},
 		{
 			name: 'Housing Litigations',
-			publisher: 'Department of Housing Preservation and Development',
+			publisher: 'Housing Preservation and Development',
 			href: open('59kj-x8nc'),
 			use: 'Heat and hot water cases the agency brought against owners in housing court.',
 			fetched: meta.fetchedAt.litigation
@@ -53,48 +53,66 @@
 	]);
 </script>
 
-<h3>The data</h3>
 <ul>
 	{#each SOURCES as s (s.name)}
-		<li>
+		<li class="card">
+			<p class="publisher">{s.publisher}</p>
 			<a href={s.href}>{s.name}</a>
-			<span class="publisher">{s.publisher}</span>
-			<span class="use">{s.use} Downloaded {nycDate(s.fetched)}.</span>
+			<p class="use">{s.use}</p>
+			<p class="when">Downloaded {nycDate(s.fetched)}</p>
 		</li>
 	{/each}
 </ul>
 
 <style>
-	h3 {
-		font-family: var(--sans);
-		font-size: 18px;
-		line-height: 1.3;
-		font-weight: 700;
-		margin: 32px 0 10px;
-	}
 	ul {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		border-top: 1px solid var(--rule);
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 12px;
 	}
 	li {
-		padding: 10px 0;
-		border-bottom: 1px solid var(--rule);
-		font-size: 15px;
-		line-height: 1.45;
-	}
-	a {
-		font-weight: 650;
-		color: var(--ink);
+		display: flex;
+		flex-direction: column;
+		padding: 18px;
+		border-radius: 16px;
+		box-shadow: none;
 	}
 	.publisher {
-		font-size: 13px;
+		margin: 0 0 6px;
+		font-size: 11.5px;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
 		color: var(--ink-3);
-		margin-left: 6px;
+	}
+	a {
+		font-size: 15.5px;
+		line-height: 1.3;
+		font-weight: 650;
+		letter-spacing: -0.01em;
 	}
 	.use {
-		display: block;
+		margin: 8px 0 12px;
+		font-size: 13.5px;
+		line-height: 1.45;
 		color: var(--ink-2);
+	}
+	.when {
+		margin: auto 0 0;
+		font-size: 12px;
+		color: var(--ink-3);
+	}
+	@media (max-width: 860px) {
+		ul {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 560px) {
+		ul {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

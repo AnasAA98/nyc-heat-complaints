@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { toUnits } from '#lib/analysis/round.ts';
 	import { num, pct, seasonLabel } from '#lib/format.ts';
 	import Figure from './Figure.svelte';
 
@@ -18,28 +19,32 @@
 
 	// Buildings are ranked by complaints, then split into three groups.
 	const GROUPS = [
-		{ label: 'The 1% of buildings with the most complaints', fill: 'var(--seq-6)', ink: 'var(--seq-6-ink)' },
-		{ label: 'The next 9%', fill: 'var(--seq-3)', ink: 'var(--seq-3-ink)' },
-		{ label: 'The other 90%', fill: 'var(--seq-1)', ink: 'var(--seq-1-ink)' }
+		{ label: 'The 1% of buildings with the most complaints', fill: 'var(--seq-6)' },
+		{ label: 'The next 9%', fill: 'var(--seq-3)' },
+		{ label: 'The other 90%', fill: 'var(--seq-1)' }
 	];
-	// A share needs about this much of the bar before its label fits inside.
-	const LABEL_MIN = 0.075;
-
 	const split = (top1: number, top10: number) => [top1, top10 - top1, 1 - top10];
-	const rows = $derived([
-		{ label: 'Apartment buildings', shares: split(0.01, 0.1) },
-		{ label: 'Apartments', shares: split(stats.top1ApartmentShare, stats.top10ApartmentShare) },
-		{ label: 'Heat complaints', shares: split(stats.top1Share, stats.top10Share) }
-	]);
+
+	// Each grid is 100 squares. The same three groups of buildings fill each one,
+	// first by their share of buildings, then of apartments, then of complaints.
+	const grids = $derived(
+		[
+			{ label: 'Apartment buildings', of: 'of buildings', shares: split(0.01, 0.1) },
+			{ label: 'Apartments', of: 'of apartments', shares: split(stats.top1ApartmentShare, stats.top10ApartmentShare) },
+			{ label: 'Heat complaints', of: 'of complaints', shares: split(stats.top1Share, stats.top10Share) }
+		].map((g) => {
+			const units = toUnits(g.shares);
+			return { ...g, units, squares: units.flatMap((n, k) => Array.from({ length: n }, () => k)) };
+		})
+	);
 </script>
 
 <Figure
 	id="buildings"
 	title="One percent of buildings, about half of the complaints"
-	subtitle="The city's {num(buildings)} apartment buildings, ranked by heat complaints in {seasonLabel(stats.season)} and split into three groups."
+	subtitle="The city's {num(buildings)} apartment buildings, ranked by heat complaints in {seasonLabel(stats.season)} and split into three groups. Each grid shows how much of the total each group holds."
 	source="NYC Open Data, 311 Service Requests; Department of City Planning, PLUTO."
-	note="Apartment buildings are tax lots with three or more homes, not counting public housing. Most had no heat complaint during the season."
-	width="text"
+	note="Apartment buildings are tax lots with three or more homes, not counting public housing. Most had no heat complaint during the season. Each square is 1 percent."
 >
 	<ul class="legend" aria-label="Building groups">
 		{#each GROUPS as g (g.label)}
@@ -47,25 +52,16 @@
 		{/each}
 	</ul>
 
-	<div class="rows">
-		{#each rows as row (row.label)}
-			<div class="row">
-				<div class="label">{row.label}</div>
-				<div class="bar" role="img" aria-label="{row.label}: {row.shares.map((s, k) => `${GROUPS[k].label}, ${pct(s)}`).join('; ')}">
-					{#each row.shares as share, k (k)}
-						<div class="seg" style:flex-grow={share} style:background={GROUPS[k].fill} style:color={GROUPS[k].ink} title="{GROUPS[k].label}: {pct(share, 1)}">
-							{#if share >= LABEL_MIN}<span>{pct(share)}</span>{/if}
-						</div>
-					{/each}
+	<div class="grids">
+		{#each grids as g (g.label)}
+			<div class="block">
+				<p class="name">{g.label}</p>
+				<div class="waffle" role="img" aria-label="{g.label}: {g.shares.map((s, k) => `${GROUPS[k].label}, ${pct(s)}`).join('; ')}">
+					{#each g.squares as k, n (n)}<i style:background={GROUPS[k].fill}></i>{/each}
 				</div>
-				<div class="lead"><b>{pct(row.shares[0])}</b></div>
+				<p class="lead"><b>{pct(g.shares[0])}</b> {g.of} in the top 1%</p>
 			</div>
 		{/each}
-		<div class="row foot" aria-hidden="true">
-			<div></div>
-			<div></div>
-			<div class="lead">in the top 1%</div>
-		</div>
 	</div>
 
 	{#snippet table()}
@@ -78,10 +74,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				{#each rows as row (row.label)}
+				{#each grids as g (g.label)}
 					<tr>
-						<th scope="row">{row.label}</th>
-						{#each row.shares as share, k (k)}<td>{pct(share, 1)}</td>{/each}
+						<th scope="row">{g.label}</th>
+						{#each g.shares as share, k (k)}<td>{pct(share, 1)}</td>{/each}
 					</tr>
 				{/each}
 			</tbody>
@@ -90,71 +86,55 @@
 </Figure>
 
 <style>
-	.legend {
-		list-style: none;
-		margin: 0 0 14px;
-		padding: 0;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 4px 16px;
-		font-size: 13px;
-		color: var(--ink-2);
-	}
-	.row {
+	.grids {
 		display: grid;
-		grid-template-columns: 138px 1fr 52px;
-		align-items: center;
-		gap: 12px;
-		margin: 10px 0;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 32px;
+		margin-top: 20px;
 	}
-	.label {
+	.name {
+		margin: 0 0 10px;
 		font-size: 14px;
-		color: var(--ink-2);
-	}
-	.bar {
-		display: flex;
-		gap: 2px;
-		height: 30px;
-	}
-	.seg {
-		flex-basis: 0;
-		min-width: 2px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 13px;
 		font-weight: 600;
-		font-variant-numeric: tabular-nums;
 	}
-	.seg:last-child {
-		border-radius: 0 4px 4px 0;
+	.waffle {
+		display: grid;
+		grid-template-columns: repeat(10, 1fr);
+		gap: 3px;
+		max-width: 260px;
+	}
+	.waffle i {
+		aspect-ratio: 1;
+		border-radius: 3px;
 	}
 	.lead {
-		text-align: right;
-		font-size: 12px;
-		color: var(--ink-3);
-		line-height: 1.2;
+		margin: 12px 0 0;
+		font-size: 13.5px;
+		line-height: 1.35;
+		color: var(--ink-2);
 	}
 	.lead b {
-		font-size: 17px;
-		font-weight: 700;
+		display: block;
+		font-size: 34px;
+		line-height: 1;
+		font-weight: 680;
+		letter-spacing: -0.03em;
 		color: var(--ink);
-		font-variant-numeric: tabular-nums;
+		margin-bottom: 4px;
 	}
-	.foot {
-		margin-top: -4px;
-	}
-	@media (max-width: 520px) {
-		.row {
-			grid-template-columns: 1fr 52px;
-			gap: 4px 12px;
+	@media (max-width: 640px) {
+		.grids {
+			grid-template-columns: 1fr;
+			gap: 26px;
 		}
-		.label {
+		.block {
+			display: grid;
+			grid-template-columns: 132px 1fr;
+			gap: 0 18px;
+			align-items: center;
+		}
+		.name {
 			grid-column: 1 / -1;
-			font-size: 13px;
-		}
-		.foot div:first-child {
-			display: none;
 		}
 	}
 </style>
