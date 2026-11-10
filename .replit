@@ -1,0 +1,13 @@
+# Replit setup. The site is static: `npm run build` writes plain files to build/.
+modules = ["nodejs-22"]
+run = "npm run dev -- --host 0.0.0.0 --port 5000"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+# Publishing: choose "Static" in the Publishing tool. These are the values to use there.
+[deployment]
+deploymentTarget = "static"
+build = ["sh", "-c", "npm ci && npm run build"]
+publicDir = "build"

@@ -3,6 +3,8 @@ import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig({
+	// Lets the dev server answer on Replit's preview address.
+	server: { allowedHosts: ['.replit.dev'] },
 	plugins: [
 		sveltekit({
 			compilerOptions: {
