@@ -2,13 +2,14 @@
 	import { CATEGORY_LABELS } from '#lib/analysis/categories.ts';
 	import { toUnits } from '#lib/analysis/round.ts';
 	import { big, pct, seasonLabel } from '#lib/format.ts';
+	import { OUTCOME_COLOR, OUTCOMES } from '#lib/outcomes.ts';
 
 	// The story's four headline numbers, each linking to the section behind it.
 	interface Props {
 		total: number;
 		bySeason: number[];
 		seasons: readonly string[];
-		outcomes: Record<'said_fixed' | 'violation' | 'no_violation' | 'no_access' | 'not_stated' | 'other', number>;
+		outcomes: Record<(typeof OUTCOMES)[number], number>;
 		pair: { earlier: string; later: string; increase: number } | null;
 		growth: number;
 		top1Share: number;
@@ -16,15 +17,8 @@
 	}
 	let { total, bySeason, seasons, outcomes, pair, growth, top1Share, top1Buildings }: Props = $props();
 
-	const ORDER = ['said_fixed', 'no_access', 'not_stated', 'no_violation', 'violation', 'other'] as const;
-	const COLOR: Record<(typeof ORDER)[number], string> = {
-		said_fixed: 'var(--orange)',
-		violation: 'var(--violet)',
-		no_violation: 'var(--gray-a)',
-		no_access: 'var(--gray-b)',
-		not_stated: 'var(--gray-c)',
-		other: 'var(--gray-d)'
-	};
+	const ORDER = OUTCOMES;
+	const COLOR = OUTCOME_COLOR;
 	// 100 squares, one per complaint, in whole numbers that add up to 100.
 	const units = $derived(toUnits(ORDER.map((c) => outcomes[c])));
 	const squares = $derived(ORDER.flatMap((c, k) => Array.from({ length: units[k] }, () => c)));

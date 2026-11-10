@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { CATEGORY_LABELS, type Category } from '#lib/analysis/categories.ts';
 	import { num, pct, seasonLabel } from '#lib/format.ts';
+	import { OUTCOME_COLOR, OUTCOMES, type Outcome } from '#lib/outcomes.ts';
 	import Figure from './Figure.svelte';
 	import Segmented from './Segmented.svelte';
 
@@ -12,18 +13,10 @@
 	}
 	let { areas, seasons, outcomes }: Props = $props();
 
-	// Display order: the two outcomes the story compares come first, then the rest.
-	// Duplicates are left out: they are extra calls about a complaint already open.
-	const SHOWN = ['said_fixed', 'violation', 'no_violation', 'no_access', 'not_stated', 'other'] as const;
-	type Shown = (typeof SHOWN)[number];
-	const COLOR: Record<Shown, string> = {
-		said_fixed: 'var(--orange)',
-		violation: 'var(--violet)',
-		no_violation: 'var(--gray-a)',
-		no_access: 'var(--gray-b)',
-		not_stated: 'var(--gray-c)',
-		other: 'var(--gray-d)'
-	};
+	// The two outcomes the story compares come first, then the rest.
+	const SHOWN = OUTCOMES;
+	type Shown = Outcome;
+	const COLOR = OUTCOME_COLOR;
 
 	let area = $state('Citywide');
 	let tip = $state<{ x: number; y: number; season: string; category: Shown } | null>(null);
@@ -75,8 +68,8 @@
 		<div class="row head" aria-hidden="true">
 			<span></span>
 			<span></span>
-			<span class="col"><span class="swatch" style:background="var(--orange)"></span>Said fixed</span>
-			<span class="col"><span class="swatch" style:background="var(--violet)"></span>Violation</span>
+			<span class="col"><span class="swatch" style:background={COLOR.said_fixed}></span>Said fixed</span>
+			<span class="col"><span class="swatch" style:background={COLOR.violation}></span>Violation</span>
 		</div>
 		{#each rows as row (row.season)}
 			<div class="row">
@@ -140,16 +133,6 @@
 </Figure>
 
 <style>
-	.legend {
-		list-style: none;
-		margin: 0 0 14px;
-		padding: 0;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 4px 16px;
-		font-size: 13px;
-		color: var(--ink-2);
-	}
 	.chart {
 		position: relative;
 	}

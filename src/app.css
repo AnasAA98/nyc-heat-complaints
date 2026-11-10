@@ -30,6 +30,16 @@
 	--gray-c: light-dark(#a9a79f, #64635e);
 	--gray-d: light-dark(#e3e2dc, #353532);
 
+	/* The six ways a complaint can end. Every pair was checked to stay apart for
+	   color-blind readers too (OKLab distance, normal and simulated), in both themes.
+	   Pale violet sits beside violet on purpose: an inspector looked in both cases. */
+	--out-fixed: var(--orange);
+	--out-violation: var(--violet);
+	--out-no-violation: light-dark(#b9aef2, #5249a6);
+	--out-no-access: light-dark(#f0c044, #e0b23c);
+	--out-not-stated: light-dark(#8f8d86, #8a8983);
+	--out-other: light-dark(#dedcd6, #3a3a37);
+
 	/* Map ramp: one hue, more complaints = further from the surface color. */
 	--seq-1: light-dark(#cde2fb, #0d366b);
 	--seq-2: light-dark(#9ec5f4, #184f95);
@@ -126,8 +136,8 @@ select {
 
 .swatch {
 	display: inline-block;
-	width: 10px;
-	height: 10px;
+	width: 12px;
+	height: 12px;
 	border-radius: 3px;
 	margin-right: 6px;
 	vertical-align: -1px;
@@ -143,9 +153,9 @@ select {
 	padding: 0;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 4px 16px;
-	font-size: 13px;
-	color: var(--ink-2);
+	gap: 6px 18px;
+	font-size: 13.5px;
+	color: var(--ink);
 }
 
 .tip {
