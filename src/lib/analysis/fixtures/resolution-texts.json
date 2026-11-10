@@ -1,0 +1,122 @@
+[
+	{
+		"text": "An HPD Inspector was not able to gain access to inspect this complaint. The Inspector left a card at the time of the inspection and a letter was sent from HPD after the inspection attempt to encourage you to call to schedule an inspection. HPD did not receive a timely response from you and the complaint has been closed. Please submit a new service request with 311 if the condition still exists.",
+		"category": "no_access"
+	},
+	{
+		"text": "HPD attempted to conduct an inspection in response to this complaint, but was unable to complete the inspection. Please submit a new service request with 311 if the condition still exists. For more information on the reason why HPD was unable to inspect, contact HPD at the Tenant Information Messaging Service at 212-863-4951.",
+		"category": "no_access"
+	},
+	{
+		"text": "HPD called the telephone number on file for this complaint.  Someone at that number indicated that the condition was corrected. The complaint has been closed. Please submit a new service request with 311 if the condition still exists.",
+		"category": "said_fixed"
+	},
+	{
+		"text": "HPD conducted an inspection of this complaint. The conditions observed by the inspector did not violate the housing laws enforced by HPD. The complaint has been closed.",
+		"category": "no_violation"
+	},
+	{
+		"text": "HPD inspected this condition so the complaint has been closed. Violations were issued. The law provides the property owner time to correct the condition(s).  Violation descriptions and the dates for the property owner to correct any violations are available at HPDONLINE.  If the owner has not corrected the condition by the date provided, you may wish to bring a case in housing court seeking the correction of these conditions.To find out more about how to start a housing court case, visit HPD's w",
+		"category": "violation"
+	},
+	{
+		"text": "HPD responded to a complaint of no heat or hot water in the building. An occupant of the building confirmed heat and hot water had been restored when the Inspector attempted to conduct the inspection or contacted you at the phone number associated with the complaint. The complaint has been closed. Please submit a new service request with 311 if the condition still exists.",
+		"category": "said_fixed"
+	},
+	{
+		"text": "HPD responded to a complaint of no heat or hot water. Heat was not required at the time of the inspection because the outside temperature was above 55ÃÂ° F; by law, violations can only be issued if the outside temperature is below 55 degrees. No violations were issued. If the temperature inside of your apartment is below 68 degrees when it is below 55 degrees outside between 6 am and 10pm OR the temperature inside of your apartment is below 62 degrees between 10 pm and 6 am, please file a new co",
+		"category": "no_violation"
+	},
+	{
+		"text": "More than one complaint was received for this building-wide condition.This complaint status is for the initial complaint.HPD conducted an inspection of this complaint. The conditions observed by the inspector did not violate the housing laws enforced by HPD. The complaint has been closed.",
+		"category": "no_violation"
+	},
+	{
+		"text": "More than one complaint was received for this building-wide condition.This complaint status is for the initial complaint.HPD responded to a complaint of no heat or hot water in the building. An occupant of the building confirmed heat and hot water had been restored when the Inspector attempted to conduct the inspection or contacted you at the phone number associated with the complaint. The complaint has been closed. Please submit a new service request with 311 if the condition still exists.",
+		"category": "said_fixed"
+	},
+	{
+		"text": "More than one complaint was received for this building-wide condition.This complaint status is for the initial complaint.The Department of Housing Preservation and Development inspected the following conditions. Violations were previously issued for these conditions. Information about specific violations is available at www.nyc.gov/hpd.",
+		"category": "other"
+	},
+	{
+		"text": "More than one complaint was received for this building-wide condition.This complaint status is for the initial complaint.The Department of Housing Preservation and Development was not able to gain access to your apartment or others in the building to inspect for a lack of heat or hot water. The complaint has been closed. If the condition still exists, please file a new complaint.",
+		"category": "no_access"
+	},
+	{
+		"text": "More than one complaint was received for this building-wide condition.This complaint status is for the initial complaint.The Department of Housing Preservation and Development was not able to gain access to your apartment to inspect for a lack of heat or hot water. However, HPD was able to verify that heat or hot water was inadequate by inspecting another apartment and a violation was issued. Information about specific violations is available at www.nyc.gov/hpd.",
+		"category": "violation"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development conducted or attempted to conduct an inspection.  More information about inspection results can be found through HPD's website at www.nyc.gov/hpd by using HPDONLINE (enter your address on the home page) and entering your SR number under the complaint status option.",
+		"category": "not_stated"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development contacted a tenant in the building and verified that the following conditions were corrected. The complaint has been closed. If the condition still exists, please file a new complaint.",
+		"category": "said_fixed"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development contacted an occupant of the apartment and verified that the following conditions were corrected. The complaint has been closed. If the condition still exists, please file a new complaint.",
+		"category": "said_fixed"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development contacted an occupant of the apartment or building and verified that the complaint was addressed.  The complaint has been closed.",
+		"category": "said_fixed"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development has closed this complaint administratively. More information can be found through HPD's website at www.nyc.gov/hpd by using HPDONLINE (enter your address on the home page) and entering your SR number under the complaint status option.",
+		"category": "other"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development inspected the following conditions. No violations were issued. The complaint has been closed.",
+		"category": "no_violation"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development inspected the following conditions. Violations were issued. Information about specific violations is available at www.nyc.gov/hpd",
+		"category": "violation"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development inspected the following conditions. Violations were issued. Information about specific violations is available at www.nyc.gov/hpd.",
+		"category": "violation"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development inspected the following conditions. Violations were previously issued for these conditions. Information about specific violations is available at www.nyc.gov/hpd.",
+		"category": "other"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development responded to a complaint of no heat or hot water and was advised by a tenant in the building that heat and hot water had been restored. If the condition still exists, please file a new complaint.",
+		"category": "said_fixed"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development responded to a complaint of no heat or hot water. Heat was not required at the time of the inspection. No violations were issued. If the condition still exists, please file a new complaint.",
+		"category": "no_violation"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development was not able to gain access to inspect the following conditions. The complaint has been closed. If the condition still exists, please file a new complaint.",
+		"category": "no_access"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development was not able to gain access to your apartment or others in the building to inspect for a lack of heat or hot water. The complaint has been closed. If the condition still exists, please file a new complaint.",
+		"category": "no_access"
+	},
+	{
+		"text": "The Department of Housing Preservation and Development was not able to gain access to your apartment to inspect for a lack of heat or hot water. However, HPD was able to verify that heat or hot water was inadequate by inspecting another apartment and a violation was issued. Information about specific violations is available at www.nyc.gov/hpd.",
+		"category": "violation"
+	},
+	{
+		"text": "The complaint you filed is a duplicate of a condition already reported by another tenant for a building-wide condition. The original complaint is still open. HPD may attempt to contact you to verify the correction of the condition or may conduct an inspection of your unit if the original complainant is not available for verification.",
+		"category": "duplicate"
+	},
+	{
+		"text": "The following complaint conditions are still open. HPD has already attempted to notify the property owner that the condition exists; the tenant should provide access for the owner to make the repair.  HPD may attempt to contact the tenant by phone to verify the correction of the condition or an HPD Inspector may attempt to conduct an inspection.",
+		"category": "other"
+	},
+	{
+		"text": "The following complaint conditions are still open. HPD may attempt to contact you to verify the correction of the condition or may conduct an inspection.",
+		"category": "other"
+	},
+	{
+		"text": "This complaint is a duplicate of a building-wide condition already reported by another tenant.  The original complaint is still open, and HPD may only need to confirm that the condition exists by inspecting one apartment.  If we cannot contact the tenant from the original complaint or get access to that apartment, HPD may attempt to contact the person who filed this complaint to verify the correction of the condition or may conduct an inspection of your unit. You can check HPDONLINE to see if a",
+		"category": "duplicate"
+	}
+]
