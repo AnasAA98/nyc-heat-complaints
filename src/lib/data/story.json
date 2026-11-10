@@ -1,0 +1,614 @@
+{
+	"seasons": [
+		"2020-21",
+		"2021-22",
+		"2022-23",
+		"2023-24",
+		"2024-25",
+		"2025-26"
+	],
+	"first": "2020-21",
+	"last": "2025-26",
+	"complaints": {
+		"total": 1484133,
+		"duplicates": 420544,
+		"nonDuplicate": 1063589,
+		"bySeason": [
+			178420,
+			222676,
+			225132,
+			235654,
+			280427,
+			341824
+		],
+		"nonDuplicateBySeason": [
+			132902,
+			157379,
+			158879,
+			176996,
+			201432,
+			236001
+		],
+		"growth": 1.92
+	},
+	"outcomesAllSeasons": {
+		"said_fixed": 0.4971,
+		"no_access": 0.1988,
+		"violation": 0.0627,
+		"no_violation": 0.1062,
+		"not_stated": 0.1144,
+		"other": 0.0208
+	},
+	"outcomesBySeason": [
+		{
+			"said_fixed": 0.5441,
+			"no_access": 0.1727,
+			"violation": 0.0516,
+			"no_violation": 0.1317,
+			"not_stated": 0.0826,
+			"other": 0.0172
+		},
+		{
+			"said_fixed": 0.5763,
+			"no_access": 0.1502,
+			"violation": 0.0509,
+			"no_violation": 0.1114,
+			"not_stated": 0.1047,
+			"other": 0.0064
+		},
+		{
+			"said_fixed": 0.552,
+			"no_access": 0.162,
+			"violation": 0.064,
+			"no_violation": 0.1122,
+			"not_stated": 0.1058,
+			"other": 0.004
+		},
+		{
+			"said_fixed": 0.4257,
+			"no_access": 0.2645,
+			"violation": 0.0749,
+			"no_violation": 0.1007,
+			"not_stated": 0.1247,
+			"other": 0.0095
+		},
+		{
+			"said_fixed": 0.4525,
+			"no_access": 0.2669,
+			"violation": 0.068,
+			"no_violation": 0.0688,
+			"not_stated": 0.121,
+			"other": 0.0229
+		},
+		{
+			"said_fixed": 0.4727,
+			"no_access": 0.1632,
+			"violation": 0.0622,
+			"no_violation": 0.1202,
+			"not_stated": 0.1314,
+			"other": 0.0503
+		}
+	],
+	"outcomesLatestByBorough": {
+		"Bronx": {
+			"said_fixed": 0.5344,
+			"no_access": 0.1197,
+			"violation": 0.056,
+			"no_violation": 0.0871,
+			"not_stated": 0.1303,
+			"other": 0.0726
+		},
+		"Brooklyn": {
+			"said_fixed": 0.402,
+			"no_access": 0.2074,
+			"violation": 0.0745,
+			"no_violation": 0.1654,
+			"not_stated": 0.1247,
+			"other": 0.026
+		},
+		"Manhattan": {
+			"said_fixed": 0.4815,
+			"no_access": 0.1431,
+			"violation": 0.0584,
+			"no_violation": 0.1238,
+			"not_stated": 0.1393,
+			"other": 0.0539
+		},
+		"Queens": {
+			"said_fixed": 0.4367,
+			"no_access": 0.2266,
+			"violation": 0.0589,
+			"no_violation": 0.1102,
+			"not_stated": 0.1354,
+			"other": 0.0322
+		},
+		"Staten Island": {
+			"said_fixed": 0.3063,
+			"no_access": 0.269,
+			"violation": 0.1034,
+			"no_violation": 0.2045,
+			"not_stated": 0.103,
+			"other": 0.0138
+		}
+	},
+	"weather": {
+		"hddBase": 65,
+		"seasons": [
+			{
+				"season": "2020-21",
+				"complaints": 178420,
+				"hdd": 4250,
+				"freezingDays": 66,
+				"complaintsPerHdd": 42
+			},
+			{
+				"season": "2021-22",
+				"complaints": 222676,
+				"hdd": 4278,
+				"freezingDays": 66,
+				"complaintsPerHdd": 52.1
+			},
+			{
+				"season": "2022-23",
+				"complaints": 225132,
+				"hdd": 3856,
+				"freezingDays": 37,
+				"complaintsPerHdd": 58.4
+			},
+			{
+				"season": "2023-24",
+				"complaints": 235654,
+				"hdd": 3866,
+				"freezingDays": 39,
+				"complaintsPerHdd": 61
+			},
+			{
+				"season": "2024-25",
+				"complaints": 280427,
+				"hdd": 4278,
+				"freezingDays": 71,
+				"complaintsPerHdd": 65.6
+			},
+			{
+				"season": "2025-26",
+				"complaints": 341824,
+				"hdd": 4791,
+				"freezingDays": 79,
+				"complaintsPerHdd": 71.4
+			}
+		],
+		"freezingDayAverage": 1880,
+		"otherDayAverage": 737,
+		"freezingDays": 358,
+		"otherDays": 1101,
+		"byLow": [
+			{
+				"label": "20°F or colder",
+				"days": 69,
+				"complaints": 221827,
+				"average": 3215
+			},
+			{
+				"label": "21–32°F",
+				"days": 289,
+				"complaints": 451080,
+				"average": 1561
+			},
+			{
+				"label": "33–40°F",
+				"days": 323,
+				"complaints": 373333,
+				"average": 1156
+			},
+			{
+				"label": "41–50°F",
+				"days": 438,
+				"complaints": 338534,
+				"average": 773
+			},
+			{
+				"label": "Above 50°F",
+				"days": 340,
+				"complaints": 99359,
+				"average": 292
+			}
+		],
+		"peak": {
+			"date": "2026-02-08",
+			"complaints": 6118,
+			"tmin": 3,
+			"tmax": 18
+		}
+	},
+	"apartments": {
+		"buildings": 171952,
+		"homes": 2691865,
+		"shareOfComplaints": 0.9355,
+		"complaintsInPublicHousing": 3433
+	},
+	"neighborhoods": {
+		"rated": 190,
+		"minApartments": 1000,
+		"cityRate": [
+			61.1,
+			76,
+			76.3,
+			80.7,
+			94.9,
+			117
+		],
+		"highest": [
+			{
+				"name": "Wakefield-Woodlawn",
+				"boro": "Bronx",
+				"rate": 368.4
+			},
+			{
+				"name": "Highbridge",
+				"boro": "Bronx",
+				"rate": 367.3
+			},
+			{
+				"name": "Pelham Parkway-Van Nest",
+				"boro": "Bronx",
+				"rate": 356.2
+			},
+			{
+				"name": "Fordham Heights",
+				"boro": "Bronx",
+				"rate": 345.9
+			},
+			{
+				"name": "Bedford Park",
+				"boro": "Bronx",
+				"rate": 343.9
+			}
+		],
+		"lowest": [
+			{
+				"name": "Tribeca-Civic Center",
+				"boro": "Manhattan",
+				"rate": 9.9
+			},
+			{
+				"name": "Financial District-Battery Park City",
+				"boro": "Manhattan",
+				"rate": 8.8
+			},
+			{
+				"name": "Co-op City",
+				"boro": "Bronx",
+				"rate": 6.9
+			},
+			{
+				"name": "Great Kills-Eltingville",
+				"boro": "Staten Island",
+				"rate": 5.5
+			},
+			{
+				"name": "Arden Heights-Rossville",
+				"boro": "Staten Island",
+				"rate": 0
+			}
+		],
+		"aboveDoubleCity": 28
+	},
+	"buildings": {
+		"seasons": [
+			{
+				"season": "2020-21",
+				"complaints": 164432,
+				"withComplaint": 22145,
+				"shareWithComplaint": 0.1288,
+				"top1Share": 0.5402,
+				"top10Share": 0.9699,
+				"top1Buildings": 1720,
+				"top1ApartmentShare": 0.0697,
+				"top1MedianUnits": 51,
+				"withViolation": 3640,
+				"heavy": {
+					"buildings": 507,
+					"apartments": 83287,
+					"complaints": 52210,
+					"withViolation": 309,
+					"withCase": 118
+				}
+			},
+			{
+				"season": "2021-22",
+				"complaints": 204490,
+				"withComplaint": 24639,
+				"shareWithComplaint": 0.1433,
+				"top1Share": 0.5206,
+				"top10Share": 0.9636,
+				"top1Buildings": 1720,
+				"top1ApartmentShare": 0.073,
+				"top1MedianUnits": 55,
+				"withViolation": 4540,
+				"heavy": {
+					"buildings": 657,
+					"apartments": 91758,
+					"complaints": 69341,
+					"withViolation": 398,
+					"withCase": 166
+				}
+			},
+			{
+				"season": "2022-23",
+				"complaints": 205519,
+				"withComplaint": 24576,
+				"shareWithComplaint": 0.1429,
+				"top1Share": 0.5329,
+				"top10Share": 0.9641,
+				"top1Buildings": 1720,
+				"top1ApartmentShare": 0.0757,
+				"top1MedianUnits": 54,
+				"withViolation": 5385,
+				"heavy": {
+					"buildings": 704,
+					"apartments": 96098,
+					"complaints": 75005,
+					"withViolation": 500,
+					"withCase": 312
+				}
+			},
+			{
+				"season": "2023-24",
+				"complaints": 217298,
+				"withComplaint": 24292,
+				"shareWithComplaint": 0.1413,
+				"top1Share": 0.5384,
+				"top10Share": 0.9673,
+				"top1Buildings": 1720,
+				"top1ApartmentShare": 0.0742,
+				"top1MedianUnits": 54,
+				"withViolation": 7071,
+				"heavy": {
+					"buildings": 782,
+					"apartments": 107227,
+					"complaints": 83261,
+					"withViolation": 652,
+					"withCase": 405
+				}
+			},
+			{
+				"season": "2024-25",
+				"complaints": 255540,
+				"withComplaint": 26557,
+				"shareWithComplaint": 0.1544,
+				"top1Share": 0.512,
+				"top10Share": 0.96,
+				"top1Buildings": 1720,
+				"top1ApartmentShare": 0.0766,
+				"top1MedianUnits": 58,
+				"withViolation": 7096,
+				"heavy": {
+					"buildings": 998,
+					"apartments": 148252,
+					"complaints": 99864,
+					"withViolation": 816,
+					"withCase": 365
+				}
+			},
+			{
+				"season": "2025-26",
+				"complaints": 314911,
+				"withComplaint": 30053,
+				"shareWithComplaint": 0.1748,
+				"top1Share": 0.4879,
+				"top10Share": 0.948,
+				"top1Buildings": 1720,
+				"top1ApartmentShare": 0.0818,
+				"top1MedianUnits": 60,
+				"withViolation": 8305,
+				"heavy": {
+					"buildings": 1208,
+					"apartments": 175285,
+					"complaints": 127245,
+					"withViolation": 953,
+					"withCase": 422
+				}
+			}
+		],
+		"heavyDays": 30,
+		"repeatDays": 20,
+		"repeat": {
+			"1": 4571,
+			"2": 2228,
+			"3": 1270,
+			"4": 763,
+			"5": 448,
+			"6": 201
+		},
+		"repeatEverySeason": {
+			"buildings": 201,
+			"apartments": 51112,
+			"complaints": 171983,
+			"withViolationAnySeason": 199,
+			"withCaseAnySeason": 158
+		}
+	},
+	"enforcement": {
+		"heatViolations": [
+			3853,
+			4871,
+			6200,
+			9188,
+			9031,
+			11876
+		],
+		"hotWaterViolations": [
+			5458,
+			6454,
+			8501,
+			11970,
+			12999,
+			15457
+		],
+		"casesOpened": [
+			799,
+			1122,
+			1877,
+			2407,
+			1822,
+			1815
+		]
+	},
+	"returns": {
+		"windowDays": 7,
+		"overall": {
+			"said_fixed": 0.5044,
+			"violation": 0.5163,
+			"no_violation": 0.4397,
+			"no_access": 0.4132,
+			"not_stated": 0.8118
+		},
+		"latest": {
+			"said_fixed": 0.5477,
+			"violation": 0.5599,
+			"no_violation": 0.4809,
+			"no_access": 0.42,
+			"not_stated": 0.8309
+		},
+		"bySize": [
+			{
+				"band": "1–2",
+				"said_fixed": {
+					"rate": 0.2634,
+					"closings": 20737
+				},
+				"violation": {
+					"rate": 0.3324,
+					"closings": 8475
+				},
+				"no_violation": {
+					"rate": 0.2846,
+					"closings": 9458
+				},
+				"no_access": {
+					"rate": 0.277,
+					"closings": 30215
+				},
+				"not_stated": {
+					"rate": 0.7379,
+					"closings": 4784
+				}
+			},
+			{
+				"band": "3–5",
+				"said_fixed": {
+					"rate": 0.2395,
+					"closings": 20856
+				},
+				"violation": {
+					"rate": 0.3466,
+					"closings": 6814
+				},
+				"no_violation": {
+					"rate": 0.2564,
+					"closings": 7565
+				},
+				"no_access": {
+					"rate": 0.2871,
+					"closings": 21429
+				},
+				"not_stated": {
+					"rate": 0.675,
+					"closings": 3508
+				}
+			},
+			{
+				"band": "6–19",
+				"said_fixed": {
+					"rate": 0.344,
+					"closings": 77794
+				},
+				"violation": {
+					"rate": 0.4769,
+					"closings": 15537
+				},
+				"no_violation": {
+					"rate": 0.339,
+					"closings": 20314
+				},
+				"no_access": {
+					"rate": 0.3466,
+					"closings": 40362
+				},
+				"not_stated": {
+					"rate": 0.7142,
+					"closings": 16149
+				}
+			},
+			{
+				"band": "20–49",
+				"said_fixed": {
+					"rate": 0.4815,
+					"closings": 153371
+				},
+				"violation": {
+					"rate": 0.5592,
+					"closings": 16667
+				},
+				"no_violation": {
+					"rate": 0.4333,
+					"closings": 28810
+				},
+				"no_access": {
+					"rate": 0.4363,
+					"closings": 48658
+				},
+				"not_stated": {
+					"rate": 0.7784,
+					"closings": 31742
+				}
+			},
+			{
+				"band": "50–99",
+				"said_fixed": {
+					"rate": 0.599,
+					"closings": 152103
+				},
+				"violation": {
+					"rate": 0.62,
+					"closings": 11070
+				},
+				"no_violation": {
+					"rate": 0.519,
+					"closings": 25232
+				},
+				"no_access": {
+					"rate": 0.5308,
+					"closings": 37505
+				},
+				"not_stated": {
+					"rate": 0.8581,
+					"closings": 37825
+				}
+			},
+			{
+				"band": "100+",
+				"said_fixed": {
+					"rate": 0.6427,
+					"closings": 91371
+				},
+				"violation": {
+					"rate": 0.7162,
+					"closings": 7046
+				},
+				"no_violation": {
+					"rate": 0.6116,
+					"closings": 18826
+				},
+				"no_access": {
+					"rate": 0.6005,
+					"closings": 26706
+				},
+				"not_stated": {
+					"rate": 0.8778,
+					"closings": 26089
+				}
+			}
+		]
+	}
+}

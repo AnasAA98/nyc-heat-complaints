@@ -4,7 +4,7 @@
 	import meta from '#lib/data/meta.json';
 
 	const fmt = (n: number) => n.toLocaleString('en-US');
-	const asOf = new Date(meta.fetchedAt).toLocaleDateString('en-US', {
+	const asOf = new Date(meta.fetchedAt.complaints).toLocaleDateString('en-US', {
 		month: 'long',
 		day: 'numeric',
 		year: 'numeric',

@@ -1,10 +1,13 @@
 {
-	"source": "NYC Open Data, 311 Service Requests from 2020 to Present (erm2-nwe9)",
-	"complaintTypes": [
-		"HEAT/HOT WATER",
-		"Heat/Hot Water"
-	],
-	"fetchedAt": "2026-11-10T02:39:24.321Z",
+	"fetchedAt": {
+		"complaints": "2026-11-10T02:39:24.321Z",
+		"pluto": "2026-11-10T03:11:42.978Z",
+		"violations": "2026-11-10T03:12:29.676Z",
+		"litigation": "2026-11-10T03:09:26.285Z",
+		"weather": "2026-11-10T03:09:11.166Z",
+		"geo": "2026-11-10T03:09:16.745Z"
+	},
+	"plutoVersion": "26v2",
 	"windowDays": 7,
 	"seasons": [
 		"2020-21",
@@ -19,8 +22,93 @@
 		"inSeason": 1484133,
 		"unspecifiedBorough": 6,
 		"noValidBbl": 6430,
+		"notInPluto": 21605,
+		"inApartmentBuildings": 1362190,
+		"inPublicHousing": 3433,
+		"noNeighborhood": 0,
 		"nonDuplicateWithBbl": 1057738,
 		"closingsChecked": 1041757,
 		"skippedOpenOrBadDates": 15981
+	},
+	"violations": {
+		"heat": [
+			3853,
+			4871,
+			6200,
+			9188,
+			9031,
+			11876
+		],
+		"hot_water": [
+			5458,
+			6454,
+			8501,
+			11970,
+			12999,
+			15457
+		],
+		"noBbl": 177,
+		"outOfSeason": 10487,
+		"rows": 116345
+	},
+	"cases": {
+		"opened": [
+			799,
+			1122,
+			1877,
+			2407,
+			1822,
+			1815
+		],
+		"noBbl": 9,
+		"outOfSeason": 1205,
+		"rows": 11047
+	},
+	"city": {
+		"lots": 767563,
+		"units": 3736645,
+		"apartmentBuildings": 171952,
+		"apartments": 2691865,
+		"publicHousingLots": 651,
+		"publicHousingUnits": 177155,
+		"byBand": {
+			"1–2": {
+				"buildings": 594960,
+				"units": 867625
+			},
+			"3–5": {
+				"buildings": 104000,
+				"units": 345199
+			},
+			"6–19": {
+				"buildings": 40922,
+				"units": 373783
+			},
+			"20–49": {
+				"buildings": 15593,
+				"units": 476596
+			},
+			"50–99": {
+				"buildings": 7127,
+				"units": 487377
+			},
+			"100+": {
+				"buildings": 4310,
+				"units": 1008910
+			}
+		},
+		"complaintsBySize": {
+			"1–2": 90475,
+			"3–5": 73435,
+			"6–19": 233763,
+			"20–49": 400441,
+			"50–99": 393418,
+			"100+": 261133
+		}
+	},
+	"lookup": {
+		"zips": 181,
+		"buildings": 56145,
+		"bytes": 5036165
 	}
 }

@@ -18,14 +18,24 @@
 		"format": "prettier --write .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"fetch": "tsx scripts/fetch.ts",
-		"build-data": "tsx scripts/build-data.ts",
-		"data": "npm run fetch && npm run build-data"
+		"fetch": "tsx scripts/fetch-complaints.ts && tsx scripts/fetch-context.ts",
+		"build-data": "tsx scripts/build-data.ts && npm run build-geo",
+		"data": "npm run fetch && npm run build-data",
+		"build-geo": "mapshaper data/raw/geo/nta.geojson -filter-fields nta2020,ntaname,boroname,ntatype -clean -simplify 4% keep-shapes -o format=topojson quantization=1e4 id-field=nta2020 src/lib/data/nta-topo.json"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^4.0.0",
 		"@sveltejs/kit": "^3.0.0",
 		"@sveltejs/vite-plugin-svelte": "^7.2.0",
+		"@types/d3-array": "^3.2.2",
+		"@types/d3-geo": "^3.1.1",
+		"@types/d3-scale": "^4.0.9",
+		"@types/d3-shape": "^3.2.0",
+		"@types/geojson": "^7946.0.16",
+		"@types/node": "^26.6.6",
+		"@types/topojson-client": "^3.1.5",
+		"@types/topojson-specification": "^1.0.5",
+		"mapshaper": "^0.7.101",
 		"prettier": "^3.8.3",
 		"prettier-plugin-svelte": "^4.1.0",
 		"svelte": "^5.57.2",
@@ -34,5 +44,13 @@
 		"typescript": "^6.0.3",
 		"vite": "^8.3.0",
 		"vitest": "^4.1.8"
+	},
+	"dependencies": {
+		"@fontsource-variable/source-serif-4": "^5.3.1",
+		"d3-array": "^3.2.5",
+		"d3-geo": "^3.1.2",
+		"d3-scale": "^4.0.3",
+		"d3-shape": "^3.2.1",
+		"topojson-client": "^3.1.0"
 	}
 }
