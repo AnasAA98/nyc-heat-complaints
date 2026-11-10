@@ -1,0 +1,392 @@
+{
+	"areas": [
+		"Citywide",
+		"Bronx",
+		"Brooklyn",
+		"Manhattan",
+		"Queens",
+		"Staten Island"
+	],
+	"seasons": [
+		"2020-21",
+		"2021-22",
+		"2022-23",
+		"2023-24",
+		"2024-25",
+		"2025-26"
+	],
+	"outcomes": {
+		"Citywide": {
+			"2020-21": {
+				"total": 178420,
+				"duplicate": 45518,
+				"said_fixed": 72315,
+				"no_access": 22956,
+				"violation": 6854,
+				"no_violation": 17504,
+				"not_stated": 10983,
+				"other": 2290
+			},
+			"2021-22": {
+				"total": 222676,
+				"duplicate": 65297,
+				"said_fixed": 90700,
+				"no_access": 23640,
+				"violation": 8018,
+				"no_violation": 17538,
+				"not_stated": 16482,
+				"other": 1001
+			},
+			"2022-23": {
+				"total": 225132,
+				"duplicate": 66253,
+				"said_fixed": 87698,
+				"no_access": 25742,
+				"violation": 10165,
+				"no_violation": 17832,
+				"not_stated": 16809,
+				"other": 633
+			},
+			"2023-24": {
+				"total": 235654,
+				"duplicate": 58658,
+				"said_fixed": 75341,
+				"no_access": 46821,
+				"violation": 13264,
+				"no_violation": 17818,
+				"not_stated": 22069,
+				"other": 1683
+			},
+			"2024-25": {
+				"total": 280427,
+				"duplicate": 78995,
+				"said_fixed": 91142,
+				"no_access": 53754,
+				"violation": 13699,
+				"no_violation": 13852,
+				"not_stated": 24381,
+				"other": 4604
+			},
+			"2025-26": {
+				"total": 341824,
+				"duplicate": 105823,
+				"said_fixed": 111560,
+				"no_access": 38515,
+				"violation": 14679,
+				"no_violation": 28374,
+				"not_stated": 31002,
+				"other": 11871
+			}
+		},
+		"Bronx": {
+			"2020-21": {
+				"total": 63467,
+				"duplicate": 15755,
+				"said_fixed": 27686,
+				"no_access": 6227,
+				"violation": 2171,
+				"no_violation": 5717,
+				"not_stated": 4352,
+				"other": 1559
+			},
+			"2021-22": {
+				"total": 79921,
+				"duplicate": 20529,
+				"said_fixed": 38106,
+				"no_access": 5474,
+				"violation": 2960,
+				"no_violation": 5947,
+				"not_stated": 6594,
+				"other": 311
+			},
+			"2022-23": {
+				"total": 82053,
+				"duplicate": 22302,
+				"said_fixed": 38088,
+				"no_access": 6180,
+				"violation": 3556,
+				"no_violation": 5908,
+				"not_stated": 5924,
+				"other": 95
+			},
+			"2023-24": {
+				"total": 84014,
+				"duplicate": 15415,
+				"said_fixed": 40980,
+				"no_access": 11070,
+				"violation": 4037,
+				"no_violation": 4816,
+				"not_stated": 7296,
+				"other": 400
+			},
+			"2024-25": {
+				"total": 101764,
+				"duplicate": 23654,
+				"said_fixed": 44519,
+				"no_access": 13794,
+				"violation": 4744,
+				"no_violation": 4429,
+				"not_stated": 9403,
+				"other": 1221
+			},
+			"2025-26": {
+				"total": 117481,
+				"duplicate": 31088,
+				"said_fixed": 46167,
+				"no_access": 10340,
+				"violation": 4834,
+				"no_violation": 7526,
+				"not_stated": 11258,
+				"other": 6268
+			}
+		},
+		"Brooklyn": {
+			"2020-21": {
+				"total": 49984,
+				"duplicate": 12822,
+				"said_fixed": 18032,
+				"no_access": 8143,
+				"violation": 2299,
+				"no_violation": 5387,
+				"not_stated": 3044,
+				"other": 257
+			},
+			"2021-22": {
+				"total": 60148,
+				"duplicate": 18402,
+				"said_fixed": 21619,
+				"no_access": 8720,
+				"violation": 2308,
+				"no_violation": 4762,
+				"not_stated": 3927,
+				"other": 410
+			},
+			"2022-23": {
+				"total": 60204,
+				"duplicate": 16727,
+				"said_fixed": 22236,
+				"no_access": 8296,
+				"violation": 3072,
+				"no_violation": 5276,
+				"not_stated": 4523,
+				"other": 74
+			},
+			"2023-24": {
+				"total": 60941,
+				"duplicate": 15131,
+				"said_fixed": 15519,
+				"no_access": 13215,
+				"violation": 4274,
+				"no_violation": 6360,
+				"not_stated": 5945,
+				"other": 497
+			},
+			"2024-25": {
+				"total": 72268,
+				"duplicate": 21549,
+				"said_fixed": 18152,
+				"no_access": 15320,
+				"violation": 4394,
+				"no_violation": 4850,
+				"not_stated": 6307,
+				"other": 1696
+			},
+			"2025-26": {
+				"total": 94034,
+				"duplicate": 33149,
+				"said_fixed": 24478,
+				"no_access": 12625,
+				"violation": 4533,
+				"no_violation": 10073,
+				"not_stated": 7594,
+				"other": 1582
+			}
+		},
+		"Manhattan": {
+			"2020-21": {
+				"total": 39104,
+				"duplicate": 9558,
+				"said_fixed": 17813,
+				"no_access": 3523,
+				"violation": 1462,
+				"no_violation": 3744,
+				"not_stated": 2651,
+				"other": 353
+			},
+			"2021-22": {
+				"total": 50378,
+				"duplicate": 16428,
+				"said_fixed": 20542,
+				"no_access": 3880,
+				"violation": 1585,
+				"no_violation": 3841,
+				"not_stated": 3854,
+				"other": 248
+			},
+			"2022-23": {
+				"total": 49809,
+				"duplicate": 16826,
+				"said_fixed": 17548,
+				"no_access": 5462,
+				"violation": 1990,
+				"no_violation": 3818,
+				"not_stated": 3724,
+				"other": 441
+			},
+			"2023-24": {
+				"total": 54262,
+				"duplicate": 18036,
+				"said_fixed": 10054,
+				"no_access": 15674,
+				"violation": 2735,
+				"no_violation": 2413,
+				"not_stated": 4754,
+				"other": 596
+			},
+			"2024-25": {
+				"total": 66052,
+				"duplicate": 22717,
+				"said_fixed": 14975,
+				"no_access": 17401,
+				"violation": 2584,
+				"no_violation": 2230,
+				"not_stated": 5128,
+				"other": 1017
+			},
+			"2025-26": {
+				"total": 81988,
+				"duplicate": 26114,
+				"said_fixed": 26901,
+				"no_access": 7998,
+				"violation": 3265,
+				"no_violation": 6916,
+				"not_stated": 7785,
+				"other": 3009
+			}
+		},
+		"Queens": {
+			"2020-21": {
+				"total": 23881,
+				"duplicate": 7054,
+				"said_fixed": 8024,
+				"no_access": 4630,
+				"violation": 754,
+				"no_violation": 2415,
+				"not_stated": 901,
+				"other": 103
+			},
+			"2021-22": {
+				"total": 29767,
+				"duplicate": 9345,
+				"said_fixed": 9774,
+				"no_access": 4930,
+				"violation": 1003,
+				"no_violation": 2692,
+				"not_stated": 1993,
+				"other": 30
+			},
+			"2022-23": {
+				"total": 30269,
+				"duplicate": 9687,
+				"said_fixed": 9158,
+				"no_access": 5170,
+				"violation": 1314,
+				"no_violation": 2469,
+				"not_stated": 2458,
+				"other": 13
+			},
+			"2023-24": {
+				"total": 33729,
+				"duplicate": 9402,
+				"said_fixed": 8099,
+				"no_access": 6329,
+				"violation": 1970,
+				"no_violation": 3872,
+				"not_stated": 3884,
+				"other": 173
+			},
+			"2024-25": {
+				"total": 37297,
+				"duplicate": 10349,
+				"said_fixed": 12807,
+				"no_access": 6569,
+				"violation": 1673,
+				"no_violation": 2018,
+				"not_stated": 3301,
+				"other": 580
+			},
+			"2025-26": {
+				"total": 44898,
+				"duplicate": 14593,
+				"said_fixed": 13235,
+				"no_access": 6867,
+				"violation": 1784,
+				"no_violation": 3339,
+				"not_stated": 4103,
+				"other": 977
+			}
+		},
+		"Staten Island": {
+			"2020-21": {
+				"total": 1981,
+				"duplicate": 328,
+				"said_fixed": 759,
+				"no_access": 432,
+				"violation": 168,
+				"no_violation": 241,
+				"not_stated": 35,
+				"other": 18
+			},
+			"2021-22": {
+				"total": 2461,
+				"duplicate": 593,
+				"said_fixed": 659,
+				"no_access": 635,
+				"violation": 162,
+				"no_violation": 296,
+				"not_stated": 114,
+				"other": 2
+			},
+			"2022-23": {
+				"total": 2797,
+				"duplicate": 711,
+				"said_fixed": 668,
+				"no_access": 634,
+				"violation": 233,
+				"no_violation": 361,
+				"not_stated": 180,
+				"other": 10
+			},
+			"2023-24": {
+				"total": 2708,
+				"duplicate": 674,
+				"said_fixed": 689,
+				"no_access": 533,
+				"violation": 248,
+				"no_violation": 357,
+				"not_stated": 190,
+				"other": 17
+			},
+			"2024-25": {
+				"total": 3045,
+				"duplicate": 726,
+				"said_fixed": 689,
+				"no_access": 669,
+				"violation": 304,
+				"no_violation": 325,
+				"not_stated": 242,
+				"other": 90
+			},
+			"2025-26": {
+				"total": 3422,
+				"duplicate": 879,
+				"said_fixed": 779,
+				"no_access": 684,
+				"violation": 263,
+				"no_violation": 520,
+				"not_stated": 262,
+				"other": 35
+			}
+		}
+	}
+}

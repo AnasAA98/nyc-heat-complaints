@@ -1,0 +1,828 @@
+{
+	"buildingsWithAnyComplaint": {
+		"2020-21": 27400,
+		"2021-22": 31113,
+		"2022-23": 31006,
+		"2023-24": 30427,
+		"2024-25": 33534,
+		"2025-26": 38253
+	},
+	"buildingsWithFixedThenBack": {
+		"2020-21": 6479,
+		"2021-22": 8069,
+		"2022-23": 7179,
+		"2023-24": 6785,
+		"2024-25": 7983,
+		"2025-26": 10162
+	},
+	"bySeasonCount": {
+		"1": 21988,
+		"2": 10725,
+		"3": 6492,
+		"4": 3970,
+		"5": 2351,
+		"6": 1131
+	},
+	"top": [
+		{
+			"bbl": "2031430130",
+			"address": "2176 TIEBOUT AVENUE",
+			"zip": "10457",
+			"borough": "Bronx",
+			"total": 2252,
+			"seasons": 6,
+			"bySeason": [
+				206,
+				389,
+				296,
+				1137,
+				181,
+				43
+			]
+		},
+		{
+			"bbl": "2039447501",
+			"address": "2090 EAST TREMONT AVENUE",
+			"zip": "10462",
+			"borough": "Bronx",
+			"total": 2204,
+			"seasons": 6,
+			"bySeason": [
+				350,
+				483,
+				547,
+				302,
+				176,
+				346
+			]
+		},
+		{
+			"bbl": "2051150024",
+			"address": "707 EAST 242 STREET",
+			"zip": "10470",
+			"borough": "Bronx",
+			"total": 1711,
+			"seasons": 6,
+			"bySeason": [
+				54,
+				138,
+				90,
+				399,
+				473,
+				557
+			]
+		},
+		{
+			"bbl": "2042850005",
+			"address": "2040 BRONXDALE AVENUE",
+			"zip": "10462",
+			"borough": "Bronx",
+			"total": 1655,
+			"seasons": 6,
+			"bySeason": [
+				307,
+				309,
+				322,
+				298,
+				182,
+				237
+			]
+		},
+		{
+			"bbl": "2039437501",
+			"address": "20 METROPOLITAN OVAL",
+			"zip": "10462",
+			"borough": "Bronx",
+			"total": 1577,
+			"seasons": 6,
+			"bySeason": [
+				264,
+				297,
+				321,
+				248,
+				152,
+				295
+			]
+		},
+		{
+			"bbl": "2025110068",
+			"address": "957 WOODYCREST AVENUE",
+			"zip": "10452",
+			"borough": "Bronx",
+			"total": 1437,
+			"seasons": 6,
+			"bySeason": [
+				66,
+				262,
+				489,
+				227,
+				156,
+				237
+			]
+		},
+		{
+			"bbl": "2049990068",
+			"address": "730 EAST 236 STREET",
+			"zip": "10466",
+			"borough": "Bronx",
+			"total": 1145,
+			"seasons": 6,
+			"bySeason": [
+				3,
+				18,
+				53,
+				539,
+				332,
+				200
+			]
+		},
+		{
+			"bbl": "2039387501",
+			"address": "34 METROPOLITAN OVAL",
+			"zip": "10462",
+			"borough": "Bronx",
+			"total": 1031,
+			"seasons": 6,
+			"bySeason": [
+				140,
+				219,
+				290,
+				113,
+				95,
+				174
+			]
+		},
+		{
+			"bbl": "2039377501",
+			"address": "1561 UNIONPORT ROAD",
+			"zip": "10462",
+			"borough": "Bronx",
+			"total": 947,
+			"seasons": 6,
+			"bySeason": [
+				166,
+				79,
+				212,
+				93,
+				177,
+				220
+			]
+		},
+		{
+			"bbl": "4005790036",
+			"address": "31-35 CRESCENT STREET",
+			"zip": "11106",
+			"borough": "Queens",
+			"total": 893,
+			"seasons": 6,
+			"bySeason": [
+				9,
+				161,
+				105,
+				154,
+				380,
+				84
+			]
+		},
+		{
+			"bbl": "2046990051",
+			"address": "1040B EAST 217 STREET",
+			"zip": "10469",
+			"borough": "Bronx",
+			"total": 853,
+			"seasons": 4,
+			"bySeason": [
+				0,
+				0,
+				1,
+				200,
+				220,
+				432
+			]
+		},
+		{
+			"bbl": "2025370047",
+			"address": "1425 UNIVERSITY AVENUE",
+			"zip": "10452",
+			"borough": "Bronx",
+			"total": 801,
+			"seasons": 6,
+			"bySeason": [
+				144,
+				212,
+				120,
+				53,
+				131,
+				141
+			]
+		},
+		{
+			"bbl": "1018260013",
+			"address": "225 CENTRAL PARK NORTH",
+			"zip": "10026",
+			"borough": "Manhattan",
+			"total": 745,
+			"seasons": 6,
+			"bySeason": [
+				62,
+				113,
+				88,
+				94,
+				129,
+				259
+			]
+		},
+		{
+			"bbl": "2032140030",
+			"address": "64 WEST 192 STREET",
+			"zip": "10468",
+			"borough": "Bronx",
+			"total": 736,
+			"seasons": 6,
+			"bySeason": [
+				17,
+				39,
+				70,
+				319,
+				231,
+				60
+			]
+		},
+		{
+			"bbl": "2033040010",
+			"address": "2664 GRAND CONCOURSE",
+			"zip": "10458",
+			"borough": "Bronx",
+			"total": 719,
+			"seasons": 6,
+			"bySeason": [
+				307,
+				178,
+				215,
+				11,
+				5,
+				3
+			]
+		},
+		{
+			"bbl": "2033150044",
+			"address": "2800 CRESTON AVENUE",
+			"zip": "10468",
+			"borough": "Bronx",
+			"total": 669,
+			"seasons": 3,
+			"bySeason": [
+				0,
+				0,
+				0,
+				20,
+				107,
+				542
+			]
+		},
+		{
+			"bbl": "2030570011",
+			"address": "2410 WASHINGTON AVENUE",
+			"zip": "10458",
+			"borough": "Bronx",
+			"total": 629,
+			"seasons": 6,
+			"bySeason": [
+				23,
+				95,
+				57,
+				157,
+				155,
+				142
+			]
+		},
+		{
+			"bbl": "2028140065",
+			"address": "2000 ANTHONY AVENUE",
+			"zip": "10457",
+			"borough": "Bronx",
+			"total": 614,
+			"seasons": 5,
+			"bySeason": [
+				0,
+				103,
+				406,
+				54,
+				11,
+				40
+			]
+		},
+		{
+			"bbl": "1020350001",
+			"address": "2588 7 AVENUE",
+			"zip": "10039",
+			"borough": "Manhattan",
+			"total": 607,
+			"seasons": 6,
+			"bySeason": [
+				50,
+				49,
+				102,
+				46,
+				208,
+				152
+			]
+		},
+		{
+			"bbl": "1020540079",
+			"address": "76 ST NICHOLAS PLACE",
+			"zip": "10032",
+			"borough": "Manhattan",
+			"total": 593,
+			"seasons": 6,
+			"bySeason": [
+				74,
+				147,
+				98,
+				70,
+				82,
+				122
+			]
+		},
+		{
+			"bbl": "2026100012",
+			"address": "530 EAST 169 STREET",
+			"zip": "10456",
+			"borough": "Bronx",
+			"total": 525,
+			"seasons": 6,
+			"bySeason": [
+				27,
+				68,
+				65,
+				174,
+				141,
+				50
+			]
+		},
+		{
+			"bbl": "2032810040",
+			"address": "357 EAST 201 STREET",
+			"zip": "10458",
+			"borough": "Bronx",
+			"total": 503,
+			"seasons": 6,
+			"bySeason": [
+				11,
+				336,
+				71,
+				21,
+				17,
+				47
+			]
+		},
+		{
+			"bbl": "2024650001",
+			"address": "111 EAST 167 STREET",
+			"zip": "10452",
+			"borough": "Bronx",
+			"total": 498,
+			"seasons": 6,
+			"bySeason": [
+				65,
+				96,
+				141,
+				64,
+				93,
+				39
+			]
+		},
+		{
+			"bbl": "2030380055",
+			"address": "450 EAST 184 STREET",
+			"zip": "10458",
+			"borough": "Bronx",
+			"total": 461,
+			"seasons": 6,
+			"bySeason": [
+				30,
+				40,
+				86,
+				169,
+				90,
+				46
+			]
+		},
+		{
+			"bbl": "2031750015",
+			"address": "50 EAST 191 STREET",
+			"zip": "10468",
+			"borough": "Bronx",
+			"total": 428,
+			"seasons": 6,
+			"bySeason": [
+				9,
+				41,
+				165,
+				202,
+				9,
+				2
+			]
+		},
+		{
+			"bbl": "2030890001",
+			"address": "685 EAST 183 STREET",
+			"zip": "10458",
+			"borough": "Bronx",
+			"total": 424,
+			"seasons": 6,
+			"bySeason": [
+				20,
+				32,
+				84,
+				94,
+				82,
+				112
+			]
+		},
+		{
+			"bbl": "4031040023",
+			"address": "63-70 AUSTIN STREET",
+			"zip": "11374",
+			"borough": "Queens",
+			"total": 413,
+			"seasons": 6,
+			"bySeason": [
+				2,
+				23,
+				82,
+				64,
+				130,
+				112
+			]
+		},
+		{
+			"bbl": "2033560146",
+			"address": "3525 DECATUR AVENUE",
+			"zip": "10467",
+			"borough": "Bronx",
+			"total": 402,
+			"seasons": 6,
+			"bySeason": [
+				63,
+				98,
+				111,
+				44,
+				67,
+				19
+			]
+		},
+		{
+			"bbl": "3064670012",
+			"address": "8851 20 AVENUE",
+			"zip": "11214",
+			"borough": "Brooklyn",
+			"total": 400,
+			"seasons": 6,
+			"bySeason": [
+				31,
+				158,
+				109,
+				58,
+				17,
+				27
+			]
+		},
+		{
+			"bbl": "2024820030",
+			"address": "751 GERARD AVENUE",
+			"zip": "10451",
+			"borough": "Bronx",
+			"total": 392,
+			"seasons": 6,
+			"bySeason": [
+				25,
+				12,
+				166,
+				91,
+				47,
+				51
+			]
+		},
+		{
+			"bbl": "3061207502",
+			"address": "9511 SHORE ROAD",
+			"zip": "11209",
+			"borough": "Brooklyn",
+			"total": 392,
+			"seasons": 5,
+			"bySeason": [
+				189,
+				110,
+				65,
+				17,
+				11,
+				0
+			]
+		},
+		{
+			"bbl": "2042380027",
+			"address": "3120 WILKINSON AVENUE",
+			"zip": "10461",
+			"borough": "Bronx",
+			"total": 390,
+			"seasons": 6,
+			"bySeason": [
+				4,
+				58,
+				69,
+				81,
+				75,
+				103
+			]
+		},
+		{
+			"bbl": "2024580026",
+			"address": "750 GRAND CONCOURSE",
+			"zip": "10451",
+			"borough": "Bronx",
+			"total": 385,
+			"seasons": 6,
+			"bySeason": [
+				13,
+				173,
+				46,
+				24,
+				85,
+				44
+			]
+		},
+		{
+			"bbl": "2037670025",
+			"address": "1230 LELAND AVENUE",
+			"zip": "10472",
+			"borough": "Bronx",
+			"total": 383,
+			"seasons": 6,
+			"bySeason": [
+				2,
+				3,
+				284,
+				13,
+				20,
+				61
+			]
+		},
+		{
+			"bbl": "2030400003",
+			"address": "4646 PARK AVENUE",
+			"zip": "10458",
+			"borough": "Bronx",
+			"total": 378,
+			"seasons": 6,
+			"bySeason": [
+				7,
+				65,
+				29,
+				90,
+				130,
+				57
+			]
+		},
+		{
+			"bbl": "3058700037",
+			"address": "6902 RIDGE BOULEVARD",
+			"zip": "11209",
+			"borough": "Brooklyn",
+			"total": 377,
+			"seasons": 6,
+			"bySeason": [
+				56,
+				21,
+				93,
+				81,
+				50,
+				76
+			]
+		},
+		{
+			"bbl": "2028120017",
+			"address": "2020 GRAND CONCOURSE",
+			"zip": "10457",
+			"borough": "Bronx",
+			"total": 376,
+			"seasons": 6,
+			"bySeason": [
+				23,
+				40,
+				81,
+				37,
+				115,
+				80
+			]
+		},
+		{
+			"bbl": "1009720001",
+			"address": "11 STUYVESANT OVAL",
+			"zip": "10009",
+			"borough": "Manhattan",
+			"total": 370,
+			"seasons": 6,
+			"bySeason": [
+				38,
+				100,
+				48,
+				21,
+				47,
+				116
+			]
+		},
+		{
+			"bbl": "2042910024",
+			"address": "2131 WALLACE AVENUE",
+			"zip": "10462",
+			"borough": "Bronx",
+			"total": 364,
+			"seasons": 6,
+			"bySeason": [
+				34,
+				117,
+				60,
+				84,
+				49,
+				20
+			]
+		},
+		{
+			"bbl": "3042719001",
+			"address": "765 LINCOLN AVENUE",
+			"zip": "11208",
+			"borough": "Brooklyn",
+			"total": 361,
+			"seasons": 5,
+			"bySeason": [
+				7,
+				107,
+				97,
+				70,
+				80,
+				0
+			]
+		},
+		{
+			"bbl": "2024760074",
+			"address": "928 GERARD AVENUE",
+			"zip": "10452",
+			"borough": "Bronx",
+			"total": 355,
+			"seasons": 6,
+			"bySeason": [
+				50,
+				45,
+				40,
+				9,
+				117,
+				94
+			]
+		},
+		{
+			"bbl": "2024590001",
+			"address": "840 GRAND CONCOURSE",
+			"zip": "10451",
+			"borough": "Bronx",
+			"total": 350,
+			"seasons": 6,
+			"bySeason": [
+				33,
+				51,
+				118,
+				60,
+				17,
+				71
+			]
+		},
+		{
+			"bbl": "2033430204",
+			"address": "250 EAST GUN HILL ROAD",
+			"zip": "10467",
+			"borough": "Bronx",
+			"total": 350,
+			"seasons": 6,
+			"bySeason": [
+				6,
+				11,
+				44,
+				64,
+				141,
+				84
+			]
+		},
+		{
+			"bbl": "2057050036",
+			"address": "223 NAPLES TERRACE",
+			"zip": "10463",
+			"borough": "Bronx",
+			"total": 346,
+			"seasons": 6,
+			"bySeason": [
+				70,
+				131,
+				67,
+				7,
+				38,
+				33
+			]
+		},
+		{
+			"bbl": "3046880001",
+			"address": "9101 CHURCH AVENUE",
+			"zip": "11236",
+			"borough": "Brooklyn",
+			"total": 343,
+			"seasons": 6,
+			"bySeason": [
+				4,
+				35,
+				117,
+				37,
+				138,
+				12
+			]
+		},
+		{
+			"bbl": "2033260021",
+			"address": "3202 KOSSUTH AVENUE",
+			"zip": "10467",
+			"borough": "Bronx",
+			"total": 336,
+			"seasons": 6,
+			"bySeason": [
+				5,
+				114,
+				1,
+				50,
+				139,
+				27
+			]
+		},
+		{
+			"bbl": "2057540090",
+			"address": "225 WEST 232 STREET",
+			"zip": "10463",
+			"borough": "Bronx",
+			"total": 335,
+			"seasons": 6,
+			"bySeason": [
+				11,
+				50,
+				41,
+				99,
+				65,
+				69
+			]
+		},
+		{
+			"bbl": "2028820229",
+			"address": "30 RICHMAN PLAZA",
+			"zip": "10453",
+			"borough": "Bronx",
+			"total": 333,
+			"seasons": 6,
+			"bySeason": [
+				45,
+				39,
+				41,
+				21,
+				112,
+				75
+			]
+		},
+		{
+			"bbl": "2036000025",
+			"address": "751 WHITE PLAINS ROAD",
+			"zip": "10473",
+			"borough": "Bronx",
+			"total": 333,
+			"seasons": 4,
+			"bySeason": [
+				0,
+				0,
+				86,
+				104,
+				82,
+				61
+			]
+		},
+		{
+			"bbl": "2032630172",
+			"address": "3840 ORLOFF AVENUE",
+			"zip": "10463",
+			"borough": "Bronx",
+			"total": 323,
+			"seasons": 6,
+			"bySeason": [
+				49,
+				90,
+				36,
+				87,
+				42,
+				19
+			]
+		}
+	]
+}

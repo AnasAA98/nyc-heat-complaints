@@ -1,0 +1,80 @@
+:root {
+	color-scheme: light;
+	--page: #f9f9f7;
+	--surface: #fcfcfb;
+	--ink: #0b0b0b;
+	--ink-2: #52514e;
+	--ink-muted: #6f6d68;
+	--grid: #e1e0d9;
+	--axis: #c3c2b7;
+	--border: rgba(11, 11, 11, 0.1);
+
+	/* Outcome colors: the two outcomes the story is about get hue, the rest gray. */
+	--said-fixed: #2a78d6;
+	--violation: #eb6834;
+	--gray-a: #8f8d86;
+	--gray-b: #cfcdc6;
+	--gray-c: #a9a79f;
+	--gray-d: #e3e2dc;
+
+	--sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--serif: Georgia, 'Times New Roman', serif;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		color-scheme: dark;
+		--page: #0d0d0d;
+		--surface: #1a1a19;
+		--ink: #f0efec;
+		--ink-2: #c3c2b7;
+		--ink-muted: #9a9890;
+		--grid: #2c2c2a;
+		--axis: #383835;
+		--border: rgba(255, 255, 255, 0.1);
+		--said-fixed: #3987e5;
+		--violation: #d95926;
+		--gray-a: #7a7973;
+		--gray-b: #4a4945;
+		--gray-c: #64635e;
+		--gray-d: #353532;
+	}
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+	--page: #0d0d0d;
+	--surface: #1a1a19;
+	--ink: #f0efec;
+	--ink-2: #c3c2b7;
+	--ink-muted: #9a9890;
+	--grid: #2c2c2a;
+	--axis: #383835;
+	--border: rgba(255, 255, 255, 0.1);
+	--said-fixed: #3987e5;
+	--violation: #d95926;
+	--gray-a: #7a7973;
+	--gray-b: #4a4945;
+	--gray-c: #64635e;
+	--gray-d: #353532;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--page);
+	color: var(--ink);
+	font-family: var(--sans);
+	line-height: 1.5;
+	-webkit-text-size-adjust: 100%;
+}
+
+a {
+	color: inherit;
+	text-underline-offset: 2px;
+}
