@@ -213,6 +213,15 @@
 				"average": 292
 			}
 		],
+		"closestPair": {
+			"earlier": "2021-22",
+			"later": "2024-25",
+			"hdd": [
+				4278,
+				4278
+			],
+			"increase": 0.2593
+		},
 		"peak": {
 			"date": "2026-02-08",
 			"complaints": 6118,
@@ -220,6 +229,50 @@
 			"tmax": 18
 		}
 	},
+	"channels": [
+		{
+			"season": "2020-21",
+			"phone": 0.3883,
+			"online": 0.4308,
+			"mobile": 0.181,
+			"other": 0
+		},
+		{
+			"season": "2021-22",
+			"phone": 0.1294,
+			"online": 0.7015,
+			"mobile": 0.169,
+			"other": 0
+		},
+		{
+			"season": "2022-23",
+			"phone": 0.1818,
+			"online": 0.6489,
+			"mobile": 0.1694,
+			"other": 0
+		},
+		{
+			"season": "2023-24",
+			"phone": 0.3143,
+			"online": 0.5063,
+			"mobile": 0.1794,
+			"other": 0
+		},
+		{
+			"season": "2024-25",
+			"phone": 0.3316,
+			"online": 0.4788,
+			"mobile": 0.1896,
+			"other": 0
+		},
+		{
+			"season": "2025-26",
+			"phone": 0.2241,
+			"online": 0.5914,
+			"mobile": 0.1845,
+			"other": 0
+		}
+	],
 	"apartments": {
 		"buildings": 171952,
 		"homes": 2691865,
@@ -304,6 +357,7 @@
 				"top10Share": 0.9699,
 				"top1Buildings": 1720,
 				"top1ApartmentShare": 0.0697,
+				"top10ApartmentShare": 0.3163,
 				"top1MedianUnits": 51,
 				"withViolation": 3640,
 				"heavy": {
@@ -323,6 +377,7 @@
 				"top10Share": 0.9636,
 				"top1Buildings": 1720,
 				"top1ApartmentShare": 0.073,
+				"top10ApartmentShare": 0.3329,
 				"top1MedianUnits": 55,
 				"withViolation": 4540,
 				"heavy": {
@@ -342,6 +397,7 @@
 				"top10Share": 0.9641,
 				"top1Buildings": 1720,
 				"top1ApartmentShare": 0.0757,
+				"top10ApartmentShare": 0.3348,
 				"top1MedianUnits": 54,
 				"withViolation": 5385,
 				"heavy": {
@@ -361,6 +417,7 @@
 				"top10Share": 0.9673,
 				"top1Buildings": 1720,
 				"top1ApartmentShare": 0.0742,
+				"top10ApartmentShare": 0.3396,
 				"top1MedianUnits": 54,
 				"withViolation": 7071,
 				"heavy": {
@@ -380,6 +437,7 @@
 				"top10Share": 0.96,
 				"top1Buildings": 1720,
 				"top1ApartmentShare": 0.0766,
+				"top10ApartmentShare": 0.3531,
 				"top1MedianUnits": 58,
 				"withViolation": 7096,
 				"heavy": {
@@ -399,6 +457,7 @@
 				"top10Share": 0.948,
 				"top1Buildings": 1720,
 				"top1ApartmentShare": 0.0818,
+				"top10ApartmentShare": 0.3632,
 				"top1MedianUnits": 60,
 				"withViolation": 8305,
 				"heavy": {

@@ -320,6 +320,51 @@ const weather = SEASONS.map((season) => {
 	};
 });
 
+// The two seasons closest in cold: the fairest like-for-like comparison.
+// Only reported if they are within half a percent of each other.
+let closestPair: { earlier: Season; later: Season; hdd: number[]; increase: number } | null = null;
+let smallestGap = Infinity;
+for (let a = 0; a < weather.length; a++) {
+	for (let b = a + 1; b < weather.length; b++) {
+		const gap = Math.abs(weather[a].hdd - weather[b].hdd) / weather[a].hdd;
+		if (gap < smallestGap && gap <= 0.005) {
+			smallestGap = gap;
+			closestPair = {
+				earlier: weather[a].season,
+				later: weather[b].season,
+				hdd: [weather[a].hdd, weather[b].hdd],
+				increase: round(weather[b].complaints / weather[a].complaints - 1)
+			};
+		}
+	}
+}
+
+// How complaints were filed, by season (from a summary query, see fetch-context.ts).
+const CHANNELS = ['PHONE', 'ONLINE', 'MOBILE'] as const;
+const channelCounts = SEASONS.map(() => ({ PHONE: 0, ONLINE: 0, MOBILE: 0, other: 0, total: 0 }));
+for (const r of JSON.parse(readFileSync(join(RAW, 'channels', 'by-month.json'), 'utf8'))) {
+	const season = seasonOf(r.month);
+	if (!season) continue;
+	const cell = channelCounts[seasonIndex(season)];
+	const key = (CHANNELS as readonly string[]).includes(r.channel) ? (r.channel as (typeof CHANNELS)[number]) : 'other';
+	cell[key] += Number(r.n);
+	cell.total += Number(r.n);
+}
+const channels = SEASONS.map((season, i) => {
+	const c = channelCounts[i];
+	// The summary was downloaded separately; it should agree with the row downloads.
+	if (c.total !== outcomes.Citywide[season].total) {
+		console.warn(`channels: ${season} has ${c.total} complaints, rows have ${outcomes.Citywide[season].total}`);
+	}
+	return {
+		season,
+		phone: round(c.PHONE / c.total),
+		online: round(c.ONLINE / c.total),
+		mobile: round(c.MOBILE / c.total),
+		other: round(c.other / c.total)
+	};
+});
+
 // ---- 6. Buildings: one record per tax lot with a complaint -----------------
 
 interface Building {
@@ -388,6 +433,14 @@ const buildingSeasons = SEASONS.map((season, i) => {
 		top1Buildings: top1Count,
 		// ...and the share of the city's apartments those same buildings hold.
 		top1ApartmentShare: round(sum(top1.map(([bbl]) => lots.get(bbl)!.units)) / city.apartments),
+		top10ApartmentShare: round(
+			sum(
+				[...active]
+					.sort((a, b) => b[1].c[i] - a[1].c[i])
+					.slice(0, Math.ceil(city.apartmentBuildings * 0.1))
+					.map(([bbl]) => lots.get(bbl)!.units)
+			) / city.apartments
+		),
 		top1MedianUnits: top1.map(([bbl]) => lots.get(bbl)!.units).sort((a, b) => a - b)[Math.floor(top1.length / 2)],
 		withViolation: active.filter(([bbl]) => hasViolation(bbl, i)).length,
 		heavy: {
@@ -591,8 +644,10 @@ const story = {
 		freezingDays: freezing.days,
 		otherDays: aboveFreezing.days,
 		byLow: buckets.map((b) => ({ ...b, average: Math.round(b.complaints / b.days) })),
+		closestPair,
 		peak
 	},
+	channels,
 	apartments: {
 		buildings: city.apartmentBuildings,
 		homes: city.apartments,
@@ -642,9 +697,11 @@ const meta = {
 		violations: done('violations').fetchedAt,
 		litigation: done('litigation').fetchedAt,
 		weather: done('weather').fetchedAt,
+		channels: done('channels').fetchedAt,
 		geo: done('geo').fetchedAt
 	},
 	plutoVersion,
+	closingTexts: textCounts.size,
 	windowDays: WINDOW_DAYS,
 	seasons: SEASONS,
 	rows: {

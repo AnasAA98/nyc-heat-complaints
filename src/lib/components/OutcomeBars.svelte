@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { CATEGORY_LABELS, type Category } from '../analysis/categories';
+	import { CATEGORY_LABELS, type Category } from '#lib/analysis/categories.ts';
+	import { num, pct, seasonLabel } from '#lib/format.ts';
+	import Figure from './Figure.svelte';
+	import Segmented from './Segmented.svelte';
 
 	type Tally = { total: number } & Record<Category, number>;
 	interface Props {
@@ -12,21 +15,19 @@
 	// Display order: the two outcomes the story compares come first, then the rest.
 	// Duplicates are left out: they are extra calls about a complaint already open.
 	const SHOWN = ['said_fixed', 'violation', 'no_violation', 'no_access', 'not_stated', 'other'] as const;
-	const COLOR: Record<(typeof SHOWN)[number], string> = {
-		said_fixed: 'var(--said-fixed)',
-		violation: 'var(--violation)',
+	type Shown = (typeof SHOWN)[number];
+	const COLOR: Record<Shown, string> = {
+		said_fixed: 'var(--orange)',
+		violation: 'var(--violet)',
 		no_violation: 'var(--gray-a)',
 		no_access: 'var(--gray-b)',
 		not_stated: 'var(--gray-c)',
 		other: 'var(--gray-d)'
 	};
-	// Inline % labels only where the segment is wide enough to hold them.
-	const LABEL_MIN_SHARE = 0.07;
 
 	let area = $state('Citywide');
-	let tip = $state<{ x: number; y: number; season: string; category: (typeof SHOWN)[number] } | null>(
-		null
-	);
+	let tip = $state<{ x: number; y: number; season: string; category: Shown } | null>(null);
+	let chart: HTMLElement;
 
 	const rows = $derived(
 		seasons.map((season) => {
@@ -40,31 +41,43 @@
 			};
 		})
 	);
+	const share = (row: (typeof rows)[number], c: Shown) => row.segments.find((s) => s.category === c)!.share;
 
-	const pct = (x: number) => `${Math.round(x * 100)}%`;
-	const fmt = (n: number) => n.toLocaleString('en-US');
-	const seasonLabel = (s: string) => s.replace('-', '–');
-
-	function showTip(e: PointerEvent, season: string, category: (typeof SHOWN)[number]) {
-		const box = (e.currentTarget as HTMLElement).closest('.chart')!.getBoundingClientRect();
+	function showTip(e: PointerEvent, season: string, category: Shown) {
+		const box = chart.getBoundingClientRect();
 		tip = { x: e.clientX - box.left, y: e.clientY - box.top, season, category };
 	}
 </script>
 
-<figure class="viz">
-	<div class="controls" role="group" aria-label="Show borough">
-		{#each areas as a (a)}
-			<button type="button" aria-pressed={area === a} onclick={() => (area = a)}>{a}</button>
-		{/each}
-	</div>
+<Figure
+	id="outcomes"
+	title="How heat complaints were closed"
+	subtitle="Share of complaints filed each heat season, by the outcome the city recorded. Repeat calls about an outage already reported are left out."
+	source="NYC Open Data, 311 Service Requests. Outcomes are grouped from the closing message on each complaint."
+	note="“Someone said it was fixed” means a tenant or other occupant told the housing agency the problem was corrected, by phone or when an inspector came. Heat season runs Oct. 1 to May 31."
+>
+	{#snippet controls()}
+		<Segmented label="Show borough" options={areas} bind:value={area} />
+	{/snippet}
 
-	<ul class="legend" aria-label="Legend">
+	<ul class="legend" aria-label="Outcomes">
 		{#each SHOWN as c (c)}
 			<li><span class="swatch" style:background={COLOR[c]}></span>{CATEGORY_LABELS[c]}</li>
 		{/each}
 	</ul>
 
-	<div class="chart" role="group" aria-label="How heat complaints were closed, by season, {area}. Full numbers in the table below.">
+	<div
+		class="chart"
+		bind:this={chart}
+		role="group"
+		aria-label="How heat complaints were closed in each season, {area}. The full numbers are in the table below."
+	>
+		<div class="row head" aria-hidden="true">
+			<span></span>
+			<span></span>
+			<span class="col"><span class="swatch" style:background="var(--orange)"></span>Said fixed</span>
+			<span class="col"><span class="swatch" style:background="var(--violet)"></span>Violation</span>
+		</div>
 		{#each rows as row (row.season)}
 			<div class="row">
 				<div class="season">{seasonLabel(row.season)}</div>
@@ -79,14 +92,12 @@
 								style:background={COLOR[s.category]}
 								onpointermove={(e) => showTip(e, row.season, s.category)}
 								onpointerleave={() => (tip = null)}
-							>
-								{#if (s.category === 'said_fixed' || s.category === 'violation') && s.share >= LABEL_MIN_SHARE}
-									<span class="inline">{pct(s.share)}</span>
-								{/if}
-							</div>
+							></div>
 						{/if}
 					{/each}
 				</div>
+				<div class="value">{pct(share(row, 'said_fixed'))}</div>
+				<div class="value">{pct(share(row, 'violation'))}</div>
 			</div>
 		{/each}
 
@@ -94,78 +105,44 @@
 			{@const row = rows.find((r) => r.season === tip!.season)!}
 			{@const seg = row.segments.find((s) => s.category === tip!.category)!}
 			<div class="tip" style:left="{tip.x}px" style:top="{tip.y}px">
-				<div class="tip-head">{area}, {seasonLabel(row.season)}</div>
-				<div><span class="swatch" style:background={COLOR[seg.category]}></span>{CATEGORY_LABELS[seg.category]}</div>
-				<div class="tip-num">{fmt(seg.n)} complaints · {pct(seg.share)}</div>
+				<span class="tip-head">{area}, {seasonLabel(row.season)}</span>
+				<strong>{pct(seg.share, 1)} · {num(seg.n)} complaints</strong>
+				<span class="swatch" style:background={COLOR[seg.category]}></span>{CATEGORY_LABELS[seg.category]}
 			</div>
 		{/if}
 	</div>
 
-
-	<details>
-		<summary>Show the numbers</summary>
-		<div class="table-wrap">
-			<table>
-				<thead>
+	{#snippet table()}
+		<table class="data-table">
+			<caption class="visually-hidden">How heat complaints were closed, {area}</caption>
+			<thead>
+				<tr>
+					<th scope="col">Season</th>
+					{#each SHOWN as c (c)}<th scope="col">{CATEGORY_LABELS[c]}</th>{/each}
+					<th scope="col">Total, without repeats</th>
+					<th scope="col">Repeat calls</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each rows as row (row.season)}
 					<tr>
-						<th scope="col">Season</th>
-						{#each SHOWN as c (c)}<th scope="col">{CATEGORY_LABELS[c]}</th>{/each}
-						<th scope="col">Total (excl. duplicates)</th>
-						<th scope="col">Duplicates</th>
+						<th scope="row">{seasonLabel(row.season)}</th>
+						{#each row.segments as s (s.category)}
+							<td>{num(s.n)} <span class="muted">({pct(s.share, 1)})</span></td>
+						{/each}
+						<td>{num(row.base)}</td>
+						<td>{num(row.duplicate)}</td>
 					</tr>
-				</thead>
-				<tbody>
-					{#each rows as row (row.season)}
-						<tr>
-							<th scope="row">{seasonLabel(row.season)}</th>
-							{#each row.segments as s (s.category)}<td>{fmt(s.n)} <span class="muted">({pct(s.share)})</span></td>{/each}
-							<td>{fmt(row.base)}</td>
-							<td>{fmt(row.duplicate)}</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</div>
-	</details>
-
-	<figcaption>
-		Share of heat and hot water complaints filed Oct. 1 – May 31 each season, by how the city closed
-		them. Excludes duplicate complaints about a condition already reported in the same building.
-	</figcaption>
-</figure>
+				{/each}
+			</tbody>
+		</table>
+	{/snippet}
+</Figure>
 
 <style>
-	.viz {
-		margin: 0;
-		padding: 16px;
-		background: var(--surface);
-		border: 1px solid var(--border);
-		border-radius: 8px;
-	}
-	.controls {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 6px;
-		margin-bottom: 14px;
-	}
-	.controls button {
-		font: inherit;
-		font-size: 14px;
-		padding: 5px 12px;
-		border-radius: 999px;
-		border: 1px solid var(--axis);
-		background: transparent;
-		color: var(--ink-2);
-		cursor: pointer;
-	}
-	.controls button[aria-pressed='true'] {
-		background: var(--ink);
-		border-color: var(--ink);
-		color: var(--surface);
-	}
 	.legend {
 		list-style: none;
-		margin: 0 0 12px;
+		margin: 0 0 14px;
 		padding: 0;
 		display: flex;
 		flex-wrap: wrap;
@@ -173,112 +150,74 @@
 		font-size: 13px;
 		color: var(--ink-2);
 	}
-	.swatch {
-		display: inline-block;
-		width: 10px;
-		height: 10px;
-		border-radius: 2px;
-		margin-right: 6px;
-		vertical-align: -1px;
-	}
 	.chart {
 		position: relative;
 	}
 	.row {
 		display: grid;
-		grid-template-columns: 64px 1fr;
+		grid-template-columns: 60px 1fr 74px 68px;
 		align-items: center;
-		gap: 8px;
-		margin: 6px 0;
+		gap: 10px;
+		margin: 7px 0;
+	}
+	.head {
+		margin-bottom: 2px;
+		font-size: 12.5px;
+		color: var(--ink-2);
+	}
+	.col {
+		text-align: right;
+		white-space: nowrap;
+	}
+	.col .swatch {
+		margin-right: 4px;
 	}
 	.season {
-		font-size: 13px;
+		font-size: 13.5px;
 		color: var(--ink-2);
 		font-variant-numeric: tabular-nums;
 	}
 	.bar {
 		display: flex;
-		gap: 2px; /* surface gap between segments */
+		gap: 2px; /* page-colored gap separates the segments */
 		height: 24px;
 	}
 	.seg {
 		flex-basis: 0;
 		min-width: 0;
-		display: flex;
-		align-items: center;
-		padding-left: 6px;
-	}
-	.seg:first-child {
-		border-radius: 0;
+		transition: opacity 120ms;
 	}
 	.seg:last-child {
 		border-radius: 0 4px 4px 0;
 	}
-	.inline {
-		font-size: 12px;
+	.bar:hover .seg:not(:hover) {
+		opacity: 0.45;
+	}
+	.value {
+		text-align: right;
+		font-size: 14px;
 		font-weight: 600;
-		color: #fff;
-		white-space: nowrap;
+		font-variant-numeric: tabular-nums;
 	}
 	.tip {
-		position: absolute;
 		transform: translate(-50%, calc(-100% - 12px));
-		pointer-events: none;
-		background: var(--surface);
-		border: 1px solid var(--border);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-		border-radius: 6px;
-		padding: 8px 10px;
-		font-size: 13px;
-		white-space: nowrap;
-		z-index: 2;
-	}
-	.tip-head {
-		color: var(--ink-muted);
-		font-size: 12px;
-	}
-	.tip-num {
-		font-weight: 600;
-	}
-	figcaption {
-		margin-top: 12px;
-		font-size: 13px;
-		color: var(--ink-muted);
-	}
-	details {
-		margin-top: 12px;
-		font-size: 13px;
-	}
-	summary {
-		cursor: pointer;
-		color: var(--ink-2);
-	}
-	.table-wrap {
-		overflow-x: auto;
-		margin-top: 8px;
-	}
-	table {
-		border-collapse: collapse;
-		font-variant-numeric: tabular-nums;
-		white-space: nowrap;
-	}
-	th,
-	td {
-		text-align: right;
-		padding: 4px 8px;
-		border-bottom: 1px solid var(--grid);
-	}
-	th:first-child {
-		text-align: left;
-	}
-	thead th {
-		font-weight: 600;
-		color: var(--ink-2);
-		white-space: normal;
-		vertical-align: bottom;
-		min-width: 80px;
 	}
 	.muted {
-		color: var(--ink-muted);
+		color: var(--ink-3);
+	}
+	@media (max-width: 520px) {
+		.row {
+			grid-template-columns: 52px 1fr 44px 40px;
+			gap: 6px;
+		}
+		.head .col {
+			font-size: 0;
+		}
+		.head .col .swatch {
+			margin-right: 0;
+		}
+		.season {
+			font-size: 12.5px;
+		}
 	}
 </style>

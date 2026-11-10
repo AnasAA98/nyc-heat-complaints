@@ -5,9 +5,11 @@
 		"violations": "2026-11-10T03:12:29.676Z",
 		"litigation": "2026-11-10T03:09:26.285Z",
 		"weather": "2026-11-10T03:09:11.166Z",
+		"channels": "2026-11-10T03:21:19.601Z",
 		"geo": "2026-11-10T03:09:16.745Z"
 	},
 	"plutoVersion": "26v2",
+	"closingTexts": 31,
 	"windowDays": 7,
 	"seasons": [
 		"2020-21",

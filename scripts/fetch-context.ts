@@ -6,6 +6,7 @@
 //   violations   HPD heat and hot water violations (an inspector's finding)
 //   litigation   heat and hot water cases HPD brought in housing court
 //   weather      daily high and low at Central Park (NOAA)
+//   channels     how complaints were filed (phone, online, mobile), by month
 //
 // Each step is cached in data/raw/<name>/; pass --refresh to download again.
 
@@ -119,4 +120,21 @@ async function weather() {
 	});
 }
 
-await Promise.all([pluto(), geo(), violations(), litigation(), weather()]);
+// How each month's heat complaints reached 311. A small summary query, so the
+// counts come straight from the API rather than from the row downloads.
+async function channels() {
+	const dir = join(RAW, 'channels');
+	await cached(dir, 'channels', async () => {
+		const body = await soql(
+			'erm2-nwe9',
+			'json',
+			`SELECT date_trunc_ym(created_date) AS month, open_data_channel_type AS channel, count(*) AS n
+			 WHERE complaint_type IN ('HEAT/HOT WATER', 'Heat/Hot Water') AND ${window('created_date')}
+			 GROUP BY month, channel ORDER BY month LIMIT 5000`
+		);
+		writeFileSync(join(dir, 'by-month.json'), body);
+		return { rows: JSON.parse(body).length };
+	});
+}
+
+await Promise.all([pluto(), geo(), violations(), litigation(), weather(), channels()]);
