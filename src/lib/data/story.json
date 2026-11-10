@@ -513,6 +513,13 @@
 			1815
 		]
 	},
+	"tooHot": {
+		"total": 327,
+		"heatSeason": 12,
+		"summer": 315,
+		"heatSeasonMostInOneApartment": 3,
+		"read": 361
+	},
 	"returns": {
 		"windowDays": 7,
 		"overall": {

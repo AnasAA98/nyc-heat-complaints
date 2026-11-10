@@ -5,6 +5,7 @@
 //   geo          neighborhood (NTA) boundaries and the tract → neighborhood table
 //   violations   HPD heat and hot water violations (an inspector's finding)
 //   litigation   heat and hot water cases HPD brought in housing court
+//   too-hot      HPD violations whose text may describe an apartment that is too hot
 //   weather      daily high and low at Central Park (NOAA)
 //   channels     how complaints were filed (phone, online, mobile), by month
 //
@@ -80,6 +81,34 @@ async function violations() {
 	});
 }
 
+// The housing code has no violation for too much heat, so these are found by
+// their wording. NYC Open Data's full-text search ($q) narrows 1.5 million rows
+// of violation text to a few thousand candidates; build-data then applies the
+// exact pattern (src/lib/analysis/tooHot.ts) and checks every match was read.
+const TOO_HOT_SEARCHES = ['excessive', 'excessively', 'extreme', 'heat season', 'summer', 'summertime', 'summers', 'overheat', 'overheated', 'overheating'];
+async function tooHot() {
+	const dir = join(RAW, 'too-hot');
+	await cached(dir, 'too-hot', async () => {
+		const LIMIT = 50_000;
+		const byId = new Map<string, Record<string, string>>();
+		for (const term of TOO_HOT_SEARCHES) {
+			const params = new URLSearchParams({
+				$q: term,
+				$where: window('inspectiondate'),
+				$select: 'violationid, bbl, apartment, boro, inspectiondate, ordernumber, class, novdescription',
+				$order: 'violationid',
+				$limit: String(LIMIT)
+			});
+			const found = JSON.parse(await get(`https://data.cityofnewyork.us/resource/wvxf-dwi5.json?${params}`));
+			if (found.length >= LIMIT) throw new Error(`too-hot: search "${term}" hit the ${LIMIT}-row limit`);
+			for (const row of found) byId.set(row.violationid, row);
+		}
+		const rows = [...byId.values()].sort((a, b) => a.violationid.localeCompare(b.violationid));
+		writeFileSync(join(dir, 'candidates.json'), JSON.stringify(rows));
+		return { rows: rows.length, searches: TOO_HOT_SEARCHES };
+	});
+}
+
 async function litigation() {
 	const dir = join(RAW, 'litigation');
 	await cached(dir, 'litigation', async () => {
@@ -137,4 +166,4 @@ async function channels() {
 	});
 }
 
-await Promise.all([pluto(), geo(), violations(), litigation(), weather(), channels()]);
+await Promise.all([pluto(), geo(), violations(), tooHot(), litigation(), weather(), channels()]);

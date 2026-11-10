@@ -12,7 +12,7 @@
 	import SectionHead from '#lib/components/SectionHead.svelte';
 	import SiteNav from '#lib/components/SiteNav.svelte';
 	import Sources from '#lib/components/Sources.svelte';
-	import { AUTHOR, REPO, TITLE } from '#lib/config.ts';
+	import { AUTHOR, REPO, SITE, TITLE } from '#lib/config.ts';
 	import meta from '#lib/data/meta.json';
 	import neighborhoods from '#lib/data/neighborhoods.json';
 	import outcomes from '#lib/data/outcomes.json';
@@ -33,6 +33,7 @@
 		{ id: 's-weather', label: 'Weather' },
 		{ id: 's-map', label: 'Map' },
 		{ id: 's-buildings', label: 'Buildings' },
+		{ id: 's-too-hot', label: 'Too hot' },
 		{ id: 's-lookup', label: 'Find a building' },
 		{ id: 'method', label: 'Method' }
 	];
@@ -67,6 +68,10 @@
 	const every = buildings.repeatEverySeason;
 	const violationsWritten = (k: number) => enforcement.heatViolations[k] + enforcement.hotWaterViolations[k];
 
+	const tooHot = story.tooHot;
+	const heatTotal = enforcement.heatViolations.reduce((a, b) => a + b, 0);
+	const perTooHot = Math.round(heatTotal / tooHot.total / 10) * 10;
+
 	// The housing agency's page on the heat and hot water rules.
 	const HEAT_RULES = 'https://www.nyc.gov/site/hpd/services-and-information/heat-and-hot-water-information.page';
 
@@ -79,7 +84,16 @@
 	<meta property="og:title" content={TITLE} />
 	<meta property="og:description" content={description} />
 	<meta property="og:type" content="article" />
-	<meta name="twitter:card" content="summary" />
+	<meta property="og:url" content="{SITE}/" />
+	<meta property="og:image" content="{SITE}/og.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta
+		property="og:image:alt"
+		content="The page title, the complaint total and a chart of heat complaints per day over six winters"
+	/>
+	<meta name="twitter:card" content="summary_large_image" />
+	<link rel="canonical" href="{SITE}/" />
 	<meta name="author" content={AUTHOR} />
 </svelte:head>
 
@@ -324,8 +338,52 @@
 		</div>
 	</section>
 
+	<section id="s-too-hot">
+		<SectionHead number="06" label="Too hot" title="Too hot: the complaint the system isn’t built for" />
+		<div class="prose copy">
+			<p>
+				The heat rules set a minimum temperature and no maximum. There is no violation for an apartment that is
+				too hot, and 311 has no way to say so either: every heat complaint is filed as “entire building” or
+				“apartment only.”
+			</p>
+			<p>
+				When inspectors do find an apartment too hot, they write it up under a general section of the housing code
+				that tells the owner to “abate the nuisance,” and describe the problem in their own words. I searched the
+				text of the housing agency’s violations for those words, like “excessive heat,” “heat on in summer” and
+				“non heat season,” and read all {num(tooHot.read)} matches. Of those, {num(tooHot.total)} described heat that
+				was too high, or running when it should have been off.
+			</p>
+			<p>
+				Over the same stretch, from October {story.first.slice(0, 4)} through May {lastEnd.slice(0, 4)}, inspectors
+				wrote {num(heatTotal)} violations for too little heat. That is about {num(perTooHot)} for every one written
+				for too much.
+			</p>
+		</div>
+
+		<Callout value={num(tooHot.heatSeason)} tone="orange">
+			violations for an apartment that was too hot during six heat seasons. In the same months, inspectors wrote
+			{num(heatTotal)} for apartments without enough heat.
+		</Callout>
+
+		<div class="prose copy">
+			<p>
+				Almost all of the too-hot violations, {num(tooHot.summer)} of {num(tooHot.total)}, were written from June
+				through September, when the heat is supposed to be off: “heat on in summer,” “radiators are hot and are on
+				during non heat season.” In the heat season itself, when the radiators are supposed to be on, inspectors
+				wrote {num(tooHot.heatSeason)} in six years, {num(tooHot.heatSeasonMostInOneApartment)} of them for the same
+				apartment. Several described heat rising through the floor from pipes below.
+			</p>
+			<p>
+				This count is a floor. A text search can miss wordings I did not think of, and a violation is an
+				inspector’s finding, not a count of hot apartments. A tenant in an overheated apartment has no rule to
+				point to, so many may never call at all.
+				<a href="{REPO}/blob/main/data/too-hot-violations.json">The violations I read are public</a>. I have asked the housing agency for more details and am still waiting for a response.
+			</p>
+		</div>
+	</section>
+
 	<section id="s-lookup">
-		<SectionHead number="06" label="Find a building" title="Look up your own building" />
+		<SectionHead number="07" label="Find a building" title="Look up your own building" />
 		<div class="prose copy">
 			<p>
 				Search {num(meta.lookup.buildings)} buildings: every apartment building in the city, and any smaller home
@@ -338,7 +396,7 @@
 	</section>
 
 	<section id="method" class="method">
-		<SectionHead number="07" label="Method" title="How I did this" />
+		<SectionHead number="08" label="Method" title="How I did this" />
 		<div class="prose copy">
 			<p>
 				Everything here comes from public records, almost all of it from NYC Open Data. The code that downloads,
@@ -388,6 +446,13 @@
 					Violations are the housing agency’s own records of orders to provide heat (sections 27-2028 and 27-2029 of
 					the housing code) or hot water (section 27-2031), counted by inspection date. Court cases are the agency’s
 					“Heat and Hot Water” cases, counted by the date they were opened.
+				</li>
+				<li>
+					Violations for too much heat have no order number of their own. I searched the text of the housing agency’s
+					violations from Oct. 1, 2020, to June 7, 2026, for words such as “excessive,” “summer” and “heat season,”
+					narrowed the results with a pattern and read every match. I left out hot water hotter than 130 degrees, a
+					separate problem, and boilers set to “summer” in winter, which mean no heat at all. If the agency writes a
+					new match, the build stops until someone reads it.
 				</li>
 			</ol>
 

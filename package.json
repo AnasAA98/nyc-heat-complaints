@@ -21,6 +21,7 @@
 		"fetch": "tsx scripts/fetch-complaints.ts && tsx scripts/fetch-context.ts",
 		"build-data": "tsx scripts/build-data.ts && npm run build-geo",
 		"data": "npm run fetch && npm run build-data",
+		"og": "tsx scripts/build-og.ts",
 		"build-geo": "mapshaper data/raw/geo/nta.geojson -filter-fields nta2020,ntaname,boroname,ntatype -clean -simplify 4% keep-shapes -o format=topojson quantization=1e4 id-field=nta2020 src/lib/data/nta-topo.json"
 	},
 	"devDependencies": {

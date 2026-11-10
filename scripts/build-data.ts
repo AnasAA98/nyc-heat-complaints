@@ -8,6 +8,10 @@
 //   src/lib/data/meta.json            sources, download dates, what was left out
 //   static/data/zip/<zip>.json        building lookup, loaded on demand
 //   data/resolution-categories.json   every closing text and the outcome it maps to
+//
+// It also reads data/too-hot-violations.json, a hand-read list of violations
+// whose text may describe an apartment that is too hot, and stops if HPD has
+// written one that nobody has read yet.
 
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -24,6 +28,7 @@ import { CATEGORIES, categorize, type Category } from '../src/lib/analysis/categ
 import { findClosings, WINDOW_DAYS, type Complaint } from '../src/lib/analysis/cameBack';
 import { seasonOf, SEASONS, type Season } from '../src/lib/analysis/season';
 import { fixMojibake } from '../src/lib/analysis/text';
+import { mightBeTooHot, type TooHotReview } from '../src/lib/analysis/tooHot';
 import { violationKind } from '../src/lib/analysis/violations';
 import { HDD_BASE, heatingDegreeDays, seasonDates } from '../src/lib/analysis/weather';
 import { readCsvDir } from './lib/csv';
@@ -144,6 +149,42 @@ for (const { row } of readCsvDir(join(RAW, 'litigation'))) {
 	}
 	bump(cases, row.bbl, seasonIndex(season));
 }
+
+// Too much heat. The housing code has no violation for it, so the candidates are
+// found by their wording and every match is read by hand. Counted over the
+// whole stretch from the first Oct. 1 to the last May 31, summers included,
+// because that is when most are written.
+const TOO_HOT_FILE = 'data/too-hot-violations.json';
+const reviewed = new Map(
+	(JSON.parse(readFileSync(TOO_HOT_FILE, 'utf8')) as TooHotReview[]).map((r) => [r.violationid, r])
+);
+const candidates = JSON.parse(readFileSync(join(RAW, 'too-hot', 'candidates.json'), 'utf8')) as Record<string, string>[];
+const matched = candidates.filter((r) => mightBeTooHot(r.novdescription ?? ''));
+const unread = matched.filter((r) => !reviewed.has(r.violationid));
+if (unread.length) {
+	for (const r of unread) console.error(`  ${r.violationid}  ${r.inspectiondate.slice(0, 10)}  ${r.novdescription}`);
+	throw new Error(`${unread.length} possible too-hot violations are not in ${TOO_HOT_FILE}; read them and add them`);
+}
+const lastDay = `${SEASONS[S - 1].slice(0, 2)}${SEASONS[S - 1].slice(5)}-05-31`;
+const tooHotRows = matched.filter((r) => {
+	const day = r.inspectiondate.slice(0, 10);
+	return reviewed.get(r.violationid)!.tooHot && day >= `${SEASONS[0].slice(0, 4)}-10-01` && day <= lastDay;
+});
+const tooHotInSeason = tooHotRows.filter((r) => seasonOf(r.inspectiondate) !== null);
+const tooHot = {
+	total: tooHotRows.length,
+	heatSeason: tooHotInSeason.length,
+	summer: tooHotRows.length - tooHotInSeason.length,
+	// The most violations written for any one apartment during heat season.
+	heatSeasonMostInOneApartment: Math.max(
+		0,
+		...Object.values(
+			Object.groupBy(tooHotInSeason, (r) => `${r.bbl} ${r.apartment}`)
+		).map((g) => g!.length)
+	),
+	read: matched.length
+};
+console.log(`too hot: ${matched.length} matches read, ${tooHot.total} too hot, ${tooHot.heatSeason} in heat season`);
 
 // ---- 3. Tax lots (PLUTO) and neighborhoods --------------------------------
 
@@ -687,6 +728,7 @@ const story = {
 		hotWaterViolations: violationTotals.hot_water,
 		casesOpened: caseTotals.opened
 	},
+	tooHot,
 	returns: {
 		windowDays: WINDOW_DAYS,
 		overall: Object.fromEntries(RETURN_CATEGORIES.map((c) => [c, rate(returnsOverall[c])])),
@@ -711,6 +753,7 @@ const meta = {
 		litigation: done('litigation').fetchedAt,
 		weather: done('weather').fetchedAt,
 		channels: done('channels').fetchedAt,
+		tooHot: done('too-hot').fetchedAt,
 		geo: done('geo').fetchedAt
 	},
 	plutoVersion,
